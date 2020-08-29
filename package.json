@@ -1,0 +1,22 @@
+{
+  "name": "metu_backend",
+  "version": "1.0.0",
+  "description": "## E-commerce back-end software with mongodb and express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eigth-programmer/METU_backend.git"
+  },
+  "author": "eigth-programmer",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/eigth-programmer/METU_backend/issues"
+  },
+  "homepage": "https://github.com/eigth-programmer/METU_backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
