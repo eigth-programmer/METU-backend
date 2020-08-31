@@ -6,27 +6,25 @@ import {ListUser} from "../application/list-user";
 import {GetUserByEmail} from "../application/get-user-by-email";
 
 export class UserController{
-    async createUser(req){
+    async createUser(user){
         const context = {};
-        const {nickName, password, role, email} = req.body;
+        const {nickName, password, role, email} = user;
         return await CreateUser(null, nickName, password, role, email, context);
     }
 
-    async updateUser(req) {
+    async updateUser(user) {
         const context = {};
-        const { id, nickName, password, role, email } = req.body;
+        const { id, nickName, password, role, email } = user;
         return await UpdateUser(id, nickName, password, role, email, context);
     }
 
-    async delete(req) {
+    async delete(id) {
         const context = {};
-        const { id } = req.body;
         return await DeleteUser(id, context);
     }
 
-    async get(req) {
+    async get(id) {
         const context = {};
-        const { id } = req.body;
         return await GetUser(id, context);
     }
 
@@ -35,9 +33,7 @@ export class UserController{
         return await ListUser(context);
     }
 
-    async getUserByEmail(req){
-        const context = {};
-        const { email } = req.body;
+    async getUserByEmail(email){
         return await GetUserByEmail(email, context);
     }
 }

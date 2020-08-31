@@ -9,9 +9,6 @@ app.use(bodyParser.json());
 app.use('/', require('./src/routes/index'));
 app.use('/users', require('./src/routes/user-route'));
 
-//session
-
-
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`)
 })
