@@ -1,11 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const port = 8181;
+const PORT = process.env.PORT || 8181;
 const app = express();
-const router = express.Router();
 app.use(bodyParser.json());
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+//Routes
+app.use('/', require('./src/routes/index'));
+app.use('/users', require('./src/routes/user-route'));
+
+//session
+
+
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost:${PORT}`)
 })

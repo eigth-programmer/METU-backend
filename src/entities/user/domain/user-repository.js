@@ -1,6 +1,6 @@
 /** Works as interface **/
 export class UserRepository {
-    create(user){
+    async create(user){
         throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
     }
 
@@ -17,6 +17,10 @@ export class UserRepository {
     }
 
     async list() {
+        throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
+    }
+
+    async getUserByEmail(email) {
         throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
     }
 }

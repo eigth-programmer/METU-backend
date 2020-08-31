@@ -1,7 +1,7 @@
 import {UserRepository} from "../domain/user-repository";
 import {User} from "../domain/user";
 
-const MongooseUser = require('../../db/mongoose/schemas/user-schema')
+const MongooseUser = require('../../../db/mongoose/schemas/user-schema')
 
 export class UserMongoRepository extends UserRepository {
     async create(user) {
@@ -9,16 +9,18 @@ export class UserMongoRepository extends UserRepository {
         await mongooseUser.save();
         return new User(mongooseUser.id,
             mongooseUser.nickName,
+            mongooseUser.email,
             mongooseUser.password,
             mongooseUser.role);
     }
 
     async update(user) {
-        const { id, nickName, password, role } = user;
+        const { id, nickName, email, password, role } = user;
         const mongooseUser = MongooseUser
-            .findByIdAndUpdate(id, { nickName, password, role });
+            .findByIdAndUpdate(id, { nickName, email, password, role });
         return new User(mongooseUser.id,
             mongooseUser.nickName,
+            mongooseUser.email,
             mongooseUser.password,
             mongooseUser.role);
     }
@@ -31,6 +33,7 @@ export class UserMongoRepository extends UserRepository {
         const mongooseUser = await MongooseUser.findById(userId);
         return new User(mongooseUser.id,
             mongooseUser.nickName,
+            mongooseUser.email,
             mongooseUser.password,
             mongooseUser.role);
     }
@@ -40,6 +43,18 @@ export class UserMongoRepository extends UserRepository {
         return mongooseUsers.map((mongooseUser) => {
             return new User(mongooseUser.id,
                 mongooseUser.nickName,
+                mongooseUser.email,
+                mongooseUser.password,
+                mongooseUser.role);
+        });
+    }
+
+    async getUserByEmail(email){
+        const mongooseUsers = await MongooseUser.findOne({email: email});
+        return mongooseUsers.map((mongooseUser) => {
+            return new User(mongooseUser.id,
+                mongooseUser.nickName,
+                mongooseUser.email,
                 mongooseUser.password,
                 mongooseUser.role);
         });
