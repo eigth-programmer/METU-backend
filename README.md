@@ -1,3 +1,5 @@
 # METU_backend
 
-## E-commerce back-end software with mongodb and express
+## E-commerce/store management software back-end
+
+* Clean architecture
