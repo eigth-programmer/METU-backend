@@ -1,7 +1,11 @@
 const express = require('express');
-const app = express();
+const bodyParser = require('body-parser');
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', function(req, res) {
-    res.send('hello world');
-});
+const port = 8181;
+const app = express();
+const router = express.Router();
+app.use(bodyParser.json());
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
