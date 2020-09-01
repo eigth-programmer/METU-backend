@@ -1,5 +1,5 @@
-import {UserController} from "../entities/user/infraestructure/user-controller";
-import {RoleController} from "../entities/role/infraestructure/role-controller";
+import {UserController} from "../../entities/user/infraestructure/user-controller";
+import {RoleController} from "../../entities/role/infraestructure/role-controller";
 const userController = new UserController();
 const roleController = new RoleController();
 

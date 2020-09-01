@@ -3,8 +3,8 @@ import {UserController} from "../entities/user/infraestructure/user-controller";
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const checkAuth = require('../helpers/check-auth');
-const roleAuth = require('../helpers/role-auth');
+const checkAuth = require('../helpers/security/check-auth');
+const roleAuth = require('../helpers/security/role-auth');
 const router = express.Router();
 const userController = new UserController();
 
