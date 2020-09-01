@@ -1,3 +1,3 @@
-export function GetRole(id, {roleRepository}){
+module.exports = function GetRole(id, {roleRepository}){
     return roleRepository.get(id);
 }

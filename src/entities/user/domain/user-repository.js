@@ -1,5 +1,5 @@
 /** Works as interface **/
-export class UserRepository {
+module.exports = class UserRepository {
     async create(user){
         throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
     }

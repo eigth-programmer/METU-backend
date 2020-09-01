@@ -1,5 +1,5 @@
-import {UserRepository} from "../domain/user-repository";
-import {User} from "../domain/user";
+const { UserRepository } = require("../domain/user-repository");
+const { User } = require("../domain/user");
 
 const MongooseUser = require('../../../db/mongoose/schemas/user-schema')
 

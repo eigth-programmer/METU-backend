@@ -1,3 +1,3 @@
-export function ListUser({userRepository}){
+module.exports = function ListUser({userRepository}){
     return userRepository.list();
 }

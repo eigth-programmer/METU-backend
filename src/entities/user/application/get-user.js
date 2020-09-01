@@ -1,3 +1,3 @@
-export function GetUser(id, {userRepository}){
+module.exports = function GetUser(id, {userRepository}){
     return userRepository.get(id);
 }

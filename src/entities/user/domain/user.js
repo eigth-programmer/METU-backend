@@ -1,4 +1,4 @@
-export class User {
+module.exports = class User {
     constructor(id, nickName, password, role, email) {
         this.id = id;
         this.nickName = nickName;

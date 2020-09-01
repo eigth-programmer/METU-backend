@@ -1,3 +1,3 @@
-export function GetUserByEmail(email, {userRepository}){
+module.exports = function GetUserByEmail(email, {userRepository}){
     return userRepository.get(email);
 }

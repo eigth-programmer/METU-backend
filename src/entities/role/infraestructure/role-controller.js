@@ -1,6 +1,6 @@
-import {GetRole} from "../application/get-role";
+const {GetRole} = require("../application/get-role");
 
-export class RoleController {
+module.exports = class RoleController {
     async get(id){
         const context = {};
         return await GetRole(id, context);

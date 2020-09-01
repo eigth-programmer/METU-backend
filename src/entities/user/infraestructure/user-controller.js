@@ -1,11 +1,11 @@
-import {CreateUser} from "../application/create-user";
-import {UpdateUser} from "../application/update-user";
-import {DeleteUser} from "../application/delete-user";
-import {GetUser} from "../application/get-user";
-import {ListUser} from "../application/list-user";
-import {GetUserByEmail} from "../application/get-user-by-email";
+const {CreateUser} = require("../application/create-user");
+const {UpdateUser} = require("../application/update-user");
+const {DeleteUser} = require("../application/delete-user");
+const {GetUser} = require("../application/get-user");
+const {ListUser} = require("../application/list-user");
+const {GetUserByEmail} = require("../application/get-user-by-email");
 
-export class UserController{
+module.exports = class UserController{
     async createUser(user){
         const context = {};
         const {nickName, password, role, email} = user;
