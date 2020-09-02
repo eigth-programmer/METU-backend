@@ -1,9 +1,7 @@
-const {ProductController} = require("../entities/product/infraestructure/product-controller");
 const express = require('express');
 const checkAuth = require('../helpers/security/check-auth');
 const roleAuth = require('../helpers/security/role-auth');
 const multer = require('multer');
-const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const storage = multer.diskStorage({
     destination: function (req, file, callback){
