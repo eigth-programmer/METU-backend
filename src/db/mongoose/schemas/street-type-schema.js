@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const streetTypeSchema = new mongoose.Schema({
+const streetTypeSchema = new Schema({
+    _id: Schema.ObjectId,
     name: String,
 });
 
