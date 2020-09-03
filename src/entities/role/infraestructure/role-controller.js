@@ -1,8 +1,7 @@
-const {GetRole} = require("../application/get-role");
-
-module.exports = class RoleController {
+class RoleController {
     async get(id){
-        const context = {};
-        return await GetRole(id, context);
+        return await true;
     }
 }
+
+module.exports = {RoleController: RoleController}

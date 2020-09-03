@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const addressSchema = new Schema({
-    _id: Schema.ObjectId,
+    _id: {type: Schema.ObjectId, auto: true},
     street: String,
     portal: Number,
     floor: Number,

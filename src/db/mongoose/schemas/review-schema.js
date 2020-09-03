@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-    _id: Schema.ObjectId,
+    _id: {type: Schema.ObjectId, auto: true},
     user: {type: Schema.ObjectId, ref:'User'},
     product: {type: Schema.ObjectId, ref:'Product'},
     created: {type: Date, default: Date.now()},

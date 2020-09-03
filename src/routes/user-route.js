@@ -1,11 +1,12 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const checkAuth = require('../helpers/security/check-auth');
 const roleAuth = require('../helpers/security/role-auth');
 const { body, validationResult } = require('express-validator');
+const { UserController } = require('../entities/user/infraestructure/user-controller')
 const router = express.Router();
-
+const userController = new UserController();
 
 router.post('/login', [
     body('email')
@@ -21,6 +22,22 @@ router.post('/login', [
         return res.status(400).json({errors: errors});
     }
 
+    userController.getByEmail(req.body.email)
+        .then(user =>{
+            if(!user) {return res.status(401).json({msg: 'Login failed'})}
+
+            bcrypt.compare(req.body.password, user.password, (err, result)=>{
+               if(err) { return res.status(401).json({msg: 'Login failed'})}
+               if(result) {
+                   const token = jwt.sign(req.body.email, process.env.JWT_KEY, {expiresIn: "1h"});
+                   return res.status(200).json({msg: 'success', token: token})
+               }
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).json({msg:'Login failed'})
+        })
 });
 
 router.post('/register', [
@@ -36,6 +53,30 @@ router.post('/register', [
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors});
     }
+
+    userController.getByEmail(req.body.email)
+        .then(user => {
+            if(user) { return res.status(409).json({msg: 'This email is already used'})}
+
+            bcrypt.hash(req.body.password, 10, (err, hash)=>{
+                if(err) {return res.status(500).json({msg: 'Hashing failed'})}
+
+                userController.create({
+                    email: req.body.email,
+                    password: hash,
+                    role: '5f5105f10bf9115dfe10fbd2'
+                }).then(()=> {
+                    const token = jwt.sign(req.body.email, process.env.JWT_KEY, {expiresIn: "1h"});
+                    return res.status(200).json({msg: 'success', token: token})
+                }).catch(err => {
+                    return res.status(500).json({msg: err});
+                })
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).json({msg:'Registering failed'})
+        })
 });
 
 router.delete('/:id', checkAuth, roleAuth, (req, res, next) => {
