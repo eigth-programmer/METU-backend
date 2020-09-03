@@ -6,12 +6,12 @@ class UserMongoRepository extends UserRepository{
     async create(user) {
         const newUser = new MongoUser(user);
         await newUser.save();
-        return new User(newUser.email, newUser.created);
+        return new User(newUser.email, newUser.password, newUser.role, newUser.created);
     }
 
     async update(user) {
         const updateUser = new MongoUser(user);
-        await updateUser.findByIdAndUpdate(user.id, {});
+        await updateUser.findByIdAndUpdate(user.id, user);
     }
 
     async delete(id) {
@@ -20,12 +20,12 @@ class UserMongoRepository extends UserRepository{
 
     async get(id) {
         const user = await MongoUser.findById(id);
-        return new User();
+        return new User(user.email, user.password, user.role, user.created);
     }
 
     async getByEmail(email) {
         const user = await MongoUser.find({ email: email });
-        return new User();
+        return new User(user.email, user.password, user.role, user.created);
     }
 }
 

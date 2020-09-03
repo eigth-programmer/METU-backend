@@ -1,6 +1,10 @@
+const getRole = require('../application/get-role');
+const {RoleMongoRepository} = require("./role-mongo-repository");
+const repository = new RoleMongoRepository();
+
 class RoleController {
     async get(id){
-        return await true;
+        return await getRole(id, repository);
     }
 }
 
