@@ -19,13 +19,23 @@ class UserMongoRepository extends UserRepository{
     }
 
     async get(id) {
+        let retUser = null;
         const user = await MongoUser.findById(id);
-        return new User(user.email, user.password, user.role, user.created);
+        if(user.length > 0) retUser = new User(user[0].email,
+            user[0].password,
+            user[0].role,
+            user[0].created);
+        return retUser;
     }
 
     async getByEmail(email) {
+        let retUser = null;
         const user = await MongoUser.find({ email: email });
-        return new User(user.email, user.password, user.role, user.created);
+        if(user.length > 0) retUser = new User(user[0].email,
+            user[0].password,
+            user[0].role,
+            user[0].created);
+        return retUser;
     }
 }
 

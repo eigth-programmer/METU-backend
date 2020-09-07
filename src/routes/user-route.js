@@ -29,7 +29,10 @@ router.post('/login', [
             bcrypt.compare(req.body.password, user.password, (err, result)=>{
                if(err) { return res.status(401).json({msg: 'Login failed'})}
                if(result) {
-                   const token = jwt.sign(req.body.email, process.env.JWT_KEY, {expiresIn: "1h"});
+                   const token = jwt.sign(
+                       {data: req.body.email},
+                       process.env.JWT_KEY,
+                       {expiresIn: 3600});
                    return res.status(200).json({msg: 'success', token: token})
                }
             });

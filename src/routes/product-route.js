@@ -17,7 +17,34 @@ router.post("/",
     checkAuth,
     roleAuth,
     upload.single('image'),
-    (req, res, next) => {
+    (req, res) => {
+
+});
+
+router.put("/:id",
+    checkAuth,
+    roleAuth,
+    upload.single('image'),
+    (req, res)=> {
+
+});
+
+router.delete("/:id",
+    checkAuth,
+    roleAuth,
+    (req, res) =>{
+
+})
+
+router.get("/:id", (req, res)=>{
+
+});
+
+router.get("/:name", (req, res)=>{
+
+});
+
+router.get("/", (req, res)=>{
 
 });
 

@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
             roleController
                 .get(userRole)
                 .then(role => {
-                    if(role.name === 'admin'){ next() }
+                    if(role && role.name === 'admin'){ next() }
                     else { return res.status(403).json({msg: 'Not authorized'})}
                 })
                 .catch(err => {
