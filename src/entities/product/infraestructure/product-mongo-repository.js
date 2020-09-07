@@ -41,6 +41,13 @@ class ProductMongoRepository extends ProductRepository{
         return retProduct;
     }
 
+    async getList(params = {}) {
+        const products = await MongoProduct.find(params);
+        return products.map( product => {
+
+        });
+    }
+
     async getByName(name) {
         let retProduct = null;
         const product = await MongoProduct.find({ name: name });

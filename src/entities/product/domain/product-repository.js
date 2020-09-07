@@ -15,6 +15,10 @@ class ProductRepository {
         throw new Error('METHOD_NOT_IMPLEMENTED');
     }
 
+    getList(params = {}) {
+        throw new Error('METHOD_NOT_IMPLEMENTED');
+    }
+
     getByName(name){
         throw new Error('METHOD_NOT_IMPLEMENTED');
     }
