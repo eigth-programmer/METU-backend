@@ -6,7 +6,7 @@ const roleAuth = require('../helpers/security/role-auth');
 const { body, validationResult } = require('express-validator');
 const { UserController } = require('../entities/user/infraestructure/user-controller')
 const router = express.Router();
-const userController = new UserController();
+const controller = new UserController();
 
 router.post('/login', [
     body('email')
@@ -22,7 +22,7 @@ router.post('/login', [
         return res.status(400).json({errors: errors});
     }
 
-    userController.getByEmail(req.body.email)
+    controller.getByEmail(req.body.email)
         .then(user =>{
             if(!user) {return res.status(401).json({msg: 'Login failed'})}
 
@@ -38,7 +38,6 @@ router.post('/login', [
             });
         })
         .catch(err => {
-            console.log(err);
             return res.status(500).json({msg:'Login failed'})
         })
 });
@@ -57,14 +56,14 @@ router.post('/register', [
         return res.status(400).json({errors: errors});
     }
 
-    userController.getByEmail(req.body.email)
+    controller.getByEmail(req.body.email)
         .then(user => {
             if(user) { return res.status(409).json({msg: 'This email is already used'})}
 
             bcrypt.hash(req.body.password, 10, (err, hash)=>{
                 if(err) {return res.status(500).json({msg: 'Hashing failed'})}
 
-                userController.create({
+                controller.create({
                     email: req.body.email,
                     password: hash,
                     role: '5f5105f10bf9115dfe10fbd2'
@@ -77,7 +76,6 @@ router.post('/register', [
             });
         })
         .catch(err => {
-            console.log(err);
             return res.status(500).json({msg:'Registering failed'})
         })
 });
