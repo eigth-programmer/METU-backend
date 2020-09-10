@@ -1,3 +1,3 @@
-module.exports = (product, repository) => {
-    return repository.create(product);
+module.exports = (feature, repository) => {
+    return repository.create(feature);
 }
