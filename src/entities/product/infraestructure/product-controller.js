@@ -3,7 +3,6 @@ const updateProduct = require('../application/update-product');
 const deleteProduct = require('../application/delete-product');
 const getProduct = require('../application/get-product');
 const listProducts = require('../application/list-product');
-const getProductByName = require('../application/get-product-by-name');
 const {ProductMongoRepository} = require('./product-mongo-repository');
 const repository = new ProductMongoRepository();
 
@@ -25,11 +24,7 @@ class ProductController {
     }
 
     async getList(params){
-        return await listProducts(id, repository);
-    }
-
-    async getByName(name){
-        return await getProductByName(name, repository);
+        return await listProducts(params, repository);
     }
 }
 
