@@ -10,7 +10,8 @@ const productSchema = new Schema({
     images: [{type: Schema.ObjectId, ref: 'Image'}],
     categories: [{type: Schema.ObjectId, ref: 'Category'}],
     taxes: [{type: Schema.ObjectId, ref: 'Tax'}],
-    features: [{type: Schema.ObjectId, ref: 'Characteristic'}]
+    features: [{type: Schema.ObjectId, ref: 'Characteristic'}],
+    stock: {type: Number, required: true}
 });
 
 module.exports = mongoose.model('Product', productSchema);
