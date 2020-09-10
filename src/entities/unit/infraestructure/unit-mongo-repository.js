@@ -21,4 +21,4 @@ class UnitMongoRepository extends UnitRepository {
     }
 }
 
-module.exports = {UnitRepository: UnitMongoRepository};
+module.exports = {UnitTaxRepository: UnitMongoRepository};

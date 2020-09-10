@@ -21,4 +21,4 @@ class CategoryMongoRepository extends CategoryRepository {
     }
 }
 
-module.exports = {CategoryRepository: CategoryMongoRepository};
+module.exports = {CategoryMongoRepository: CategoryMongoRepository};

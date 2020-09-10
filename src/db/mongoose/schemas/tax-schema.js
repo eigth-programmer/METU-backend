@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const taxSchema = new Schema({
     _id: {type: Schema.ObjectId, auto: true},
-    name: {type: String, required: true},
+    name: {type: String, required: true, unique: true},
     amount: {type: Number, required: true}
 });
 
