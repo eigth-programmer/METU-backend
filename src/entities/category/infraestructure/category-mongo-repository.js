@@ -14,8 +14,8 @@ class CategoryMongoRepository extends CategoryRepository {
     }
 
     async getList(params = {}) {
-        const features = await MongoCategory.find(params);
-        return features.map( feature => {
+        const categories = await MongoCategory.find(params);
+        return categories.map( feature => {
             new Category();
         })
     }
