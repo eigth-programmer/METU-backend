@@ -6,4 +6,4 @@ const unitSchema = new Schema({
     name: {type: String, required: true, unique: true}
 });
 
-module.exports = mongoose.model('Category', unitSchema);
+module.exports = mongoose.model('Unit', unitSchema);

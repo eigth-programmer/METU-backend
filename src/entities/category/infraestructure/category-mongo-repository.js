@@ -5,8 +5,8 @@ const {CategoryRepository} = require('../domain/category-repository');
 class CategoryMongoRepository extends CategoryRepository {
     async create(category) {
         const newCategory = new MongoCategory(category);
-        await newCategory.save();
-        return new Category();
+        const saved = await newCategory.save();
+        return new Category(saved);
     }
 
     async delete(id) {
@@ -15,7 +15,7 @@ class CategoryMongoRepository extends CategoryRepository {
 
     async getList(params = {}) {
         const categories = await MongoCategory.find(params);
-        return categories.map( feature => {
+        return categories.map(category => {
             new Category();
         })
     }

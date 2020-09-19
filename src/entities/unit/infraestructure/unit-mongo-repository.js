@@ -15,10 +15,10 @@ class UnitMongoRepository extends UnitRepository {
 
     async getList(params = {}) {
         const units = await MongoUnit.find(params);
-        return units.map( unit => {
+        return units.map(unit => {
             new Unit();
         })
     }
 }
 
-module.exports = {UnitTaxRepository: UnitMongoRepository};
+module.exports = {UnitMongoRepository: UnitMongoRepository};

@@ -15,7 +15,7 @@ class FeatureMongoRepository extends FeatureRepository {
 
     async getList(params = {}) {
         const features = await MongoFeature.find(params);
-        return features.map( feature => {
+        return features.map(feature => {
             new Feature();
         })
     }

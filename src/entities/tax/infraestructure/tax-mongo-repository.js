@@ -15,7 +15,7 @@ class TaxMongoRepository extends TaxRepository {
 
     async getList(params = {}) {
         const taxes = await MongoTax.find(params);
-        return taxes.map( tax => {
+        return taxes.map(tax => {
             new Tax();
         })
     }
