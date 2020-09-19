@@ -1,32 +1,37 @@
 const express = require('express');
 const checkAuth = require('../helpers/security/check-auth');
 const roleAuth = require('../helpers/security/role-auth');
-const { TaxController } = require('../entities/tax/infraestructure/tax-controller');
+const { ReviewController } = require('../entities/review/infraestructure/review-controller');
 
 const router = express.Router();
-const controller = new TaxController();
+const controller = new ReviewController();
 
 // @TODO sanitize parameters
-router.post('/', checkAuth, roleAuth, (req, res) => {
+router.post('/', checkAuth, (req, res) => {
     controller.create({
+        // @TODO add parameters correctly
         name: req.body.name,
-        amount: req.body.amount
     })
-        .then(tax =>{
-            return res.status(200).json({tax: tax});
+        .then(review =>{
+            return res.status(200).json({review: review});
         })
         .catch(() => {
-            return res.status(500).json({msg:'Could not register tax'})
+            return res.status(500).json({msg:'Could not register review'})
         });
+});
+
+// @TODO sanitize parameters
+router.put('/:id', checkAuth, (req, res)=>{
+
 });
 
 // @TODO sanitize parameters
 router.get('/', (req, res) => {
     const params = {};
     controller.getList(params)
-        .then(taxes => {
-            if(taxes.length === 0) return res.status(200).json({msg: 'No results where found'})
-            return res.status(200).json({taxes: taxes});
+        .then(reviews => {
+            if(reviews.length === 0) return res.status(200).json({msg: 'No results where found'})
+            return res.status(200).json({reviews: reviews});
         })
         .catch(() => {
             return res.status(500).json({msg:'Could not retrieve list'})
@@ -40,7 +45,7 @@ router.delete('/:id', checkAuth, roleAuth, (req, res)=>{
             return res.status(200).json({msg:'Success'});
         })
         .catch(() => {
-            return res.status(500).json({msg:'Could not delete tax'});
+            return res.status(500).json({msg:'Could not delete review'});
         });
 });
 

@@ -27,6 +27,10 @@ app.use('/units', require('./src/routes/unit-route'));
 app.use('/taxes', require('./src/routes/tax-route'));
 app.use('/features', require('./src/routes/feature-route'));
 app.use('/categories', require('./src/routes/category-route'));
+app.use('/streetTypes', require('./src/routes/streetType-route'));
+app.use('/reviews', require('./src/routes/review-route'));
+app.use('/addresses',require('./src/routes/address-route'));
+app.use('/order',require('./src/routes/order-route'));
 
 app.listen(PORT, () => {
     console.log(`Metu app listening at http://localhost:${PORT}`)
