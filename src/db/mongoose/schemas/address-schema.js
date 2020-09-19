@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const addressSchema = new Schema({
     _id: {type: Schema.ObjectId, auto: true},
-    street: String,
-    portal: Number,
+    street: {type: String, required: true},
+    portal: {type: String, required: true},
     floor: Number,
     door: String,
     city: String,
