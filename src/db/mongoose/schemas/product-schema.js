@@ -11,6 +11,7 @@ const productSchema = new Schema({
     categories: [{type: Schema.ObjectId, ref: 'Category'}],
     taxes: [{type: Schema.ObjectId, ref: 'Tax'}],
     features: [{type: Schema.ObjectId, ref: 'Characteristic'}],
+    discounts: [{type: Schema.ObjectId, ref: 'Discount'}],
     stock: {type: Number, required: true}
 });
 
