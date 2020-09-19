@@ -1,9 +1,9 @@
-class ProductRepository {
-    create(product){
+class ReviewRepository {
+    create(review){
         throw new Error('METHOD_NOT_IMPLEMENTED');
     }
 
-    update(product){
+    update(review){
         throw new Error('METHOD_NOT_IMPLEMENTED');
     }
 
@@ -11,17 +11,9 @@ class ProductRepository {
         throw new Error('METHOD_NOT_IMPLEMENTED');
     }
 
-    get(id){
-        throw new Error('METHOD_NOT_IMPLEMENTED');
-    }
-
     getList(params = {}) {
-        throw new Error('METHOD_NOT_IMPLEMENTED');
-    }
-
-    getByName(name){
         throw new Error('METHOD_NOT_IMPLEMENTED');
     }
 }
 
-module.exports = {ProductRepository: ProductRepository}
+module.exports = {ReviewRepository: ReviewRepository}
