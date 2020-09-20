@@ -7,7 +7,7 @@ const router = express.Router();
 const controller = new FeatureController();
 
 
-router.post('/', checkAuth, roleAuth, (req, res) => {
+router.post('/',  (req, res) => {
     controller.create({
         name: req.body.name,
         unit: req.body.unit
@@ -25,14 +25,14 @@ router.get('/', (req, res) => {
     controller.getList()
         .then(features => {
             if(features.length === 0) return res.status(200).json({msg: 'No results where found'})
-            return res.status(200).json({features: features});
+            return res.status(200).json({features: features, length: features.length});
         })
         .catch(() => {
             return res.status(500).json({msg:'Could not retrieve list'})
         });
 });
 
-router.delete('/:id', checkAuth, roleAuth, (req, res)=>{
+router.delete('/:id', (req, res)=>{
     controller
         .delete()
         .then(() => {

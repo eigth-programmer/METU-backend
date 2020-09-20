@@ -10,7 +10,6 @@ class DiscountMongoRepository extends DiscountRepository{
     }
 
     async update(discount) {
-        console.log(discount)
         const {id, name, validity, amount, description} = await MongoDiscount.findByIdAndUpdate(discount.id,
             {name: discount.name, validity: discount.validity, amount: discount.amount, description: discount.description});
         return new Discount(id, name, validity, amount, description);
