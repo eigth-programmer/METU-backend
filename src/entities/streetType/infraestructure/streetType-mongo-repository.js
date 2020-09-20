@@ -21,4 +21,4 @@ class StreetTypeMongoRepository extends StreetTypeRepository {
     }
 }
 
-module.exports = {StreetTypeMongoMongoRepository: StreetTypeMongoRepository};
+module.exports = {StreetTypeMongoRepository: StreetTypeMongoRepository};

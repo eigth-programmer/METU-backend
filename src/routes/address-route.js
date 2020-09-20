@@ -7,38 +7,61 @@ const router = express.Router();
 const controller = new AddressController();
 
 // @TODO sanitize parameters
-router.post('/', checkAuth, (req, res) => {
+router.post('/', (req, res) => {
     controller.create({
-        // @TODO add parameters correctly
-        name: req.body.name,
+        street: req.body.street,
+        portal: req.body.portal,
+        floor: req.body.floor,
+        door: req.body.door,
+        city: req.body.city,
+        postCode: req.body.postCode,
+        country: req.body.country,
+        client: req.body.client,
+        type: req.body.type
+    })
+        .then(address =>{
+            return res.status(200).json({address: address});
+        })
+        .catch(err => {
+            return res.status(500).json({msg:'Could not register address', error: err})
+        });
+});
+
+// @TODO sanitize parameters
+router.put('/:id', (req, res)=>{
+    controller.update({
+        id: req.params.id,
+        street: req.body.street,
+        portal: req.body.portal,
+        floor: req.body.floor,
+        door: req.body.door,
+        city: req.body.city,
+        country: req.body.country,
+        client: req.body.client,
+        type: req.body.type
     })
         .then(address =>{
             return res.status(200).json({address: address});
         })
         .catch(() => {
-            return res.status(500).json({msg:'Could not register address'})
+            return res.status(500).json({msg:'Could not update address'})
         });
 });
 
 // @TODO sanitize parameters
-router.put('/:id', checkAuth, (req, res)=>{
-
-});
-
-// @TODO sanitize parameters
-router.get('/', checkAuth, roleAuth,( req, res) => {
+router.get('/', ( req, res) => {
     const params = {};
     controller.getList(params)
         .then(addresses => {
             if(addresses.length === 0) return res.status(200).json({msg: 'No results where found'})
-            return res.status(200).json({addresses: addresses});
+            return res.status(200).json({addresses: addresses, length: addresses.length});
         })
-        .catch(() => {
-            return res.status(500).json({msg:'Could not retrieve list'})
+        .catch(err => {
+            return res.status(500).json({msg:'Could not retrieve list', err: err})
         });
 });
 
-router.delete('/:id', checkAuth, (req, res)=>{
+router.delete('/:id', (req, res)=>{
     controller
         .delete()
         .then(() => {

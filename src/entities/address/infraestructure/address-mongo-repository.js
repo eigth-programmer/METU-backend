@@ -5,13 +5,53 @@ const {AddressRepository} = require('../domain/address-repository')
 class AddressMongoRepository extends AddressRepository{
     async create(address) {
         const newAddress = new MongoAddress(address);
-        await newAddress.save();
-        return new Address(newAddress);
+        const {id,
+            street,
+            portal,
+            floor,
+            door,
+            city,
+            postCode,
+            country,
+            client,
+            type} = await newAddress.save();
+
+        return new Address(id,
+            street,
+            portal,
+            floor,
+            door,
+            city,
+            postCode,
+            country,
+            client,
+            type);
     }
 
     async update(address) {
         const updateAddress = new MongoAddress(address);
-        await updateAddress.findByIdAndUpdate(address.id, address);
+
+        const {id,
+            street,
+            portal,
+            floor,
+            door,
+            city,
+            postCode,
+            country,
+            client,
+            type} = await updateAddress.findByIdAndUpdate(address.id, address);
+
+        return new Address(id,
+            street,
+            portal,
+            floor,
+            door,
+            city,
+            postCode,
+            country,
+            client,
+            type);
     }
 
     async delete(id) {
@@ -19,10 +59,33 @@ class AddressMongoRepository extends AddressRepository{
     }
 
     async getList(params = {}) {
-        const address = await MongoAddress.find(params);
-        return address.map( address => {
-            new Address(address);
+        const addresses = await MongoAddress.find();
+        let list = [];
+        addresses.forEach(address => {
+            const {id,
+                street,
+                portal,
+                floor,
+                door,
+                city,
+                postCode,
+                country,
+                client,
+                type} = address;
+
+            list.push(new Address(id,
+                street,
+                portal,
+                floor,
+                door,
+                city,
+                postCode,
+                country,
+                client,
+                type));
         });
+
+        return list;
     }
 }
 

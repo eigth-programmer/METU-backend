@@ -8,7 +8,7 @@ const addressSchema = new Schema({
     floor: Number,
     door: String,
     city: String,
-    post_code: Number,
+    postCode: Number,
     country: String,
     client: {type: Schema.ObjectId, ref: 'Client'},
     type: {type: Schema.ObjectId, ref: 'StreetType'}
