@@ -7,10 +7,13 @@ const router = express.Router();
 const controller = new OrderController();
 
 // @TODO sanitize parameters
-router.post('/', checkAuth, (req, res) => {
+router.post('/', (req, res) => {
     controller.create({
-        // @TODO add parameters correctly
-        name: req.body.name,
+        user: req.body.user,
+        comment: req.body.comment,
+        state: req.body.state,
+        discounts: req.body.discounts,
+        lines: req.body.lines
     })
         .then(order =>{
             return res.status(200).json({order: order});
@@ -21,26 +24,49 @@ router.post('/', checkAuth, (req, res) => {
 });
 
 // @TODO sanitize parameters
-router.put('/:id', checkAuth, (req, res)=>{
+router.put('/:id', (req, res)=>{
+    controller.update({
+        id: req.params.id,
+        user: req.body.user,
+        comment: req.body.comment,
+        state: req.body.state,
+        discounts: req.body.discounts,
+        lines: req.body.lines
+    })
+        .then(order =>{
+            return res.status(200).json({order: order});
+        })
+        .catch(() => {
+            return res.status(500).json({msg:'Could not update order'})
+        });
+});
 
+router.get('/:id', (req, res)=>{
+    controller.get(req.params.id)
+        .then(order =>{
+            return res.status(200).json({order: order});
+        })
+        .catch(() => {
+            return res.status(500).json({msg:'Could not retrieve order'})
+        });
 });
 
 // @TODO sanitize parameters
-router.get('/', checkAuth,( req, res) => {
+router.get('/',( req, res) => {
     const params = {};
     controller.getList(params)
         .then(orders => {
             if(orders.length === 0) return res.status(200).json({msg: 'No results where found'})
-            return res.status(200).json({orders: orders});
+            return res.status(200).json({orders: orders, length: orders.length});
         })
         .catch(() => {
             return res.status(500).json({msg:'Could not retrieve list'})
         });
 });
 
-router.delete('/:id', checkAuth, (req, res)=>{
+router.delete('/:id', (req, res)=>{
     controller
-        .delete()
+        .delete(req.params.id)
         .then(() => {
             return res.status(200).json({msg:'Success'});
         })

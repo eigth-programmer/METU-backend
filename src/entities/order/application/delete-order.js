@@ -1,3 +1,3 @@
-module.exports = (params, repository) => {
-    return repository.getList(params);
+module.exports = (id, repository) => {
+    return repository.delete(id);
 }

@@ -6,4 +6,4 @@ const orderStateSchema = new Schema({
     name: {type: String}
 });
 
-module.exports = mongoose.model('OrderLine', orderStateSchema);
+module.exports = mongoose.model('OrderState', orderStateSchema);

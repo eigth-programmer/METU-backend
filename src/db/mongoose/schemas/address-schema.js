@@ -10,8 +10,8 @@ const addressSchema = new Schema({
     city: {type: String, unique: false},
     postCode: {type: Number, unique: false},
     country: {type: String},
-    client: {type: Schema.ObjectId, ref: 'Client', unique: false},
-    type: {type: Schema.ObjectId, ref: 'StreetType'}
+    client: {type: Schema.ObjectId, ref: 'Client', required: true, unique: false},
+    type: {type: Schema.ObjectId, ref: 'StreetType', required: true}
 });
 
 addressSchema.index({street: 1, portal: 1, floor: 1, door: 1, city: 1, postCode: 1, client: 1}, {unique: true})

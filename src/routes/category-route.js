@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 
 router.delete('/:id', (req, res)=>{
     controller
-        .delete()
+        .delete(req.params.id)
         .then(() => {
             return res.status(200).json({msg:'Success'});
         })
