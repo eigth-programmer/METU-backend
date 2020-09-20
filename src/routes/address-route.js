@@ -36,6 +36,7 @@ router.put('/:id', (req, res)=>{
         floor: req.body.floor,
         door: req.body.door,
         city: req.body.city,
+        postCode: req.body.postCode,
         country: req.body.country,
         client: req.body.client,
         type: req.body.type

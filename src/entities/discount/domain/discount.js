@@ -1,9 +1,10 @@
 class Discount {
-    constructor(name, validity, amount, discount) {
+    constructor(id, name, validity, amount, description) {
+        this.id = id;
         this.name = name;
         this.validity = validity;
         this.amount = amount;
-        this.discount = discount;
+        this.description = description;
     }
 }
 

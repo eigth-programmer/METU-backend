@@ -5,7 +5,7 @@ const discountSchema = new Schema({
     _id: {type: Schema.ObjectId, auto: true},
     name: {type: String},
     validity: {type: Date},
-    amount: {type: String},
+    amount: {type: String, required: true},
     description:{type: String},
 });
 

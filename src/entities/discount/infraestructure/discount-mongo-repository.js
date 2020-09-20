@@ -5,13 +5,15 @@ const {DiscountRepository} = require('../domain/discount-repository')
 class DiscountMongoRepository extends DiscountRepository{
     async create(discount) {
         const newDiscount = new MongoDiscount(discount);
-        await newDiscount.save();
-        return new Discount(newDiscount);
+        const {id, name, validity, amount, description} = await newDiscount.save();
+        return new Discount(id, name, validity, amount, description);
     }
 
     async update(discount) {
-        const updateDiscount = new MongoDiscount(discount);
-        await updateDiscount.findByIdAndUpdate(discount.id, discount);
+        console.log(discount)
+        const {id, name, validity, amount, description} = await MongoDiscount.findByIdAndUpdate(discount.id,
+            {name: discount.name, validity: discount.validity, amount: discount.amount, description: discount.description});
+        return new Discount(id, name, validity, amount, description);
     }
 
     async delete(id) {
@@ -20,10 +22,13 @@ class DiscountMongoRepository extends DiscountRepository{
 
     async getList(params = {}) {
         const discounts = await MongoDiscount.find(params);
-        return discounts.map( discount => {
-            new Discount(discount);
+        let list = [];
+        discounts.forEach(discount => {
+            const {id, name, validity, amount, description} = discount;
+            list.push(new Discount(id, name, validity, amount, description));
         });
+         return list;
     }
 }
 
-module.exports = {ReviewMongoRepository: DiscountMongoRepository};
+module.exports = {DiscountMongoRepository: DiscountMongoRepository};

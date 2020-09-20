@@ -29,7 +29,6 @@ class AddressMongoRepository extends AddressRepository{
     }
 
     async update(address) {
-        const updateAddress = new MongoAddress(address);
 
         const {id,
             street,
@@ -40,7 +39,15 @@ class AddressMongoRepository extends AddressRepository{
             postCode,
             country,
             client,
-            type} = await updateAddress.findByIdAndUpdate(address.id, address);
+            type} = await MongoAddress.findByIdAndUpdate(address.id, {street: address.street,
+            portal: address.portal,
+            floor: address.floor,
+            door: address.door,
+            city: address.city,
+            postCode: address.postCode,
+            country: address.country,
+            client: address.client,
+            type: address.type});
 
         return new Address(id,
             street,
