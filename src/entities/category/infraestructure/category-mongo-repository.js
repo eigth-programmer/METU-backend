@@ -5,19 +5,22 @@ const {CategoryRepository} = require('../domain/category-repository');
 class CategoryMongoRepository extends CategoryRepository {
     async create(category) {
         const newCategory = new MongoCategory(category);
-        const saved = await newCategory.save();
-        return new Category(saved);
+        const {id, name} = await newCategory.save();
+        return new Category(id, name);
     }
 
     async delete(id) {
-        return MongoCategory.findByIdAndDelete(id);
+        return MongoCategory.findOneAndDelete(id);
     }
 
     async getList(params = {}) {
         const categories = await MongoCategory.find(params);
-        return categories.map(category => {
-            new Category();
+        let list = [];
+        categories.forEach(category => {
+            const {id, name} = category;
+            list.push(new Category(id, name));
         })
+        return list;
     }
 }
 

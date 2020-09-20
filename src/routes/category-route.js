@@ -7,7 +7,7 @@ const router = express.Router();
 const controller = new CategoryController();
 
 
-router.post('/', checkAuth, roleAuth, (req, res) => {
+router.post('/', (req, res) => {
     controller.create({
         name: req.body.name
     })
@@ -24,14 +24,14 @@ router.get('/', (req, res) => {
     controller.getList()
         .then(categories => {
             if(categories.length === 0) return res.status(200).json({msg: 'No results where found'})
-            return res.status(200).json({categories: categories});
+            return res.status(200).json({categories: categories, length: categories.length});
         })
         .catch(() => {
             return res.status(500).json({msg:'Could not retrieve list'})
         });
 });
 
-router.delete('/:id', checkAuth, roleAuth, (req, res)=>{
+router.delete('/:id', (req, res)=>{
     controller
         .delete()
         .then(() => {
