@@ -1,7 +1,8 @@
 class Unit {
-    constructor(id, name) {
+    constructor(id, name, symbol) {
         this.id = id;
         this.name = name;
+        this.symbol = symbol;
     }
 }
 

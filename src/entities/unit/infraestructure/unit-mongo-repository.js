@@ -5,8 +5,8 @@ const {UnitRepository} = require('../domain/unit-repository');
 class UnitMongoRepository extends UnitRepository {
     async create(unit) {
         const newUnit = new MongoUnit(unit);
-        await newUnit.save();
-        return new Unit();
+        const {id, name, symbol} = await newUnit.save();
+        return new Unit(id, name, symbol);
     }
 
     async delete(id) {
@@ -15,9 +15,12 @@ class UnitMongoRepository extends UnitRepository {
 
     async getList(params = {}) {
         const units = await MongoUnit.find(params);
-        return units.map(unit => {
-            new Unit();
-        })
+        let list = [];
+        units.forEach(unit => {
+            const {id, name, symbol} = unit;
+            list.push(new Unit(id, name, symbol));
+        });
+        return list;
     }
 }
 

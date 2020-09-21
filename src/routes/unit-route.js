@@ -7,9 +7,10 @@ const router = express.Router();
 const controller = new UnitController();
 
 
-router.post('/', checkAuth, roleAuth, (req, res) => {
+router.post('/',  (req, res) => {
     controller.create({
-        name: req.body.name
+        name: req.body.name,
+        symbol: req.body.symbol
     })
         .then(unit =>{
             return res.status(200).json({unit: unit});
@@ -25,16 +26,16 @@ router.get('/', (req, res) => {
     controller.getList(params)
         .then(units => {
             if(units.length === 0) return res.status(200).json({msg: 'No results where found'})
-            return res.status(200).json({units: units});
+            return res.status(200).json({units: units, length: units.length});
         })
         .catch(() => {
             return res.status(500).json({msg:'Could not retrieve list'})
         });
 });
 
-router.delete('/:id', checkAuth, roleAuth, (req, res)=>{
+router.delete('/:id', (req, res)=>{
     controller
-        .delete()
+        .delete(req.params.id)
         .then(() => {
             return res.status(200).json({msg:'Success'});
         })
