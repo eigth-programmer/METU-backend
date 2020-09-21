@@ -7,7 +7,7 @@ const router = express.Router();
 const controller = new StreetTypeController();
 
 // @TODO sanitize parameters
-router.post('/', checkAuth, roleAuth, (req, res) => {
+router.post('/', (req, res) => {
     controller.create({
         name: req.body.name,
     })
@@ -25,16 +25,16 @@ router.get('/', (req, res) => {
     controller.getList(params)
         .then(streetTypes => {
             if(streetTypes.length === 0) return res.status(200).json({msg: 'No results where found'})
-            return res.status(200).json({streetTypes: streetTypes});
+            return res.status(200).json({streetTypes: streetTypes, length: streetTypes.length});
         })
-        .catch(() => {
-            return res.status(500).json({msg:'Could not retrieve list'})
+        .catch(err => {
+            return res.status(500).json({msg:'Could not retrieve list', err: err})
         });
 });
 
-router.delete('/:id', checkAuth, roleAuth, (req, res)=>{
+router.delete('/:id',  (req, res)=>{
     controller
-        .delete()
+        .delete(req.params.id)
         .then(() => {
             return res.status(200).json({msg:'Success'});
         })

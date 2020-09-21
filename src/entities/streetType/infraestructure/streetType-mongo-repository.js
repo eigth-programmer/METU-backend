@@ -5,8 +5,8 @@ const {StreetTypeRepository} = require('../domain/streetType-repository');
 class StreetTypeMongoRepository extends StreetTypeRepository {
     async create(streetType) {
         const newStreetType = new MongoStreetType(streetType);
-        await newStreetType.save();
-        return new StreetType();
+        const {id, name} = await newStreetType.save();
+        return new StreetType(id, name);
     }
 
     async delete(id) {
@@ -15,9 +15,12 @@ class StreetTypeMongoRepository extends StreetTypeRepository {
 
     async getList(params = {}) {
         const streetTypes = await MongoStreetType.find(params);
-        return streetTypes.map(streetType => {
-            new StreetType();
-        })
+        let list = [];
+        streetTypes.forEach(streetType => {
+            const {id, name} = streetType;
+            list.push(new StreetType(id, name));
+        });
+        return list;
     }
 }
 
