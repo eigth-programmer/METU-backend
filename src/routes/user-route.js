@@ -66,7 +66,7 @@ router.post('/register', [
                 controller.create({
                     email: req.body.email,
                     password: hash,
-                    role: '5f5105f10bf9115dfe10fbd2'
+                    role: req.body.role
                 }).then(()=> {
                     const token = jwt.sign(req.body.email, process.env.JWT_KEY, {expiresIn: "1h"});
                     return res.status(200).json({msg: 'success', token: token})
@@ -80,11 +80,24 @@ router.post('/register', [
         })
 });
 
-router.delete('/:id', checkAuth, roleAuth, (req, res, next) => {
-
+router.delete('/:id',  (req, res, next) => {
+    controller
+        .delete(req.params.id)
+        .then(() => {
+            return res.status(200).json({msg:'Success'})
+        }).catch(err => {
+            return res.status(500).json({msg:'Could not delete user', error: err})
+        });
 })
 
-router.get('/:email', checkAuth, roleAuth, (req,res) => {
-
+router.get('/:email',  (req,res) => {
+    controller
+        .getByEmail(req.params.email)
+        .then(user => {
+            return res.status(200).json({user: user})
+        })
+        .catch(err => {
+            return res.status(500).json({msg:'Could not retrieve user', error: err})
+        })
 })
 module.exports = router;

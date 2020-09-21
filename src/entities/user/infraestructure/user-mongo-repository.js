@@ -5,36 +5,31 @@ const {UserRepository} = require("../domain/user-repository");
 class UserMongoRepository extends UserRepository{
     async create(user) {
         const newUser = new MongoUser(user);
-        await newUser.save();
-        return new User(newUser.email, newUser.password, newUser.role, newUser.created);
+        const {id, email, password, role, created} = await newUser.save();
+        return new User(id, email, password, role, created);
     }
 
     async update(user) {
-        const updateUser = new MongoUser(user);
-        await updateUser.findByIdAndUpdate(user.id, user);
+        const {id, email, password, role, created} = await MongoUser.findByIdAndUpdate(user.id, {
+            email: user.email,
+            password: user.password,
+            role: user.role
+        });
+
+        return new User(id, email, password, role, created);
     }
 
     async delete(id) {
         return MongoUser.findOneAndDelete(id);
     }
 
-    async get(id) {
-        let retUser = null;
-        const user = await MongoUser.findById(id);
-        if(user.length > 0) retUser = new User(user[0].email,
-            user[0].password,
-            user[0].role,
-            user[0].created);
-        return retUser;
-    }
-
     async getByEmail(email) {
         let retUser = null;
         const user = await MongoUser.find({ email: email });
-        if(user.length > 0) retUser = new User(user[0].email,
-            user[0].password,
-            user[0].role,
-            user[0].created);
+        if(user) retUser = new User(user.email,
+            user.password,
+            user.role,
+            user.created);
         return retUser;
     }
 }

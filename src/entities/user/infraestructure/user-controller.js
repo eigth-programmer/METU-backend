@@ -2,7 +2,6 @@ const createUser = require('../application/create-user');
 const updateUser = require('../application/update-user');
 const deleteUser = require('../application/delete-user');
 const getUserByEmail = require('../application/get-user-by-email');
-const getUser = require('../application/get-user');
 const {UserMongoRepository} = require("./user-mongo-repository");
 const repository = new UserMongoRepository();
 
@@ -17,10 +16,6 @@ class UserController {
 
     async delete(id) {
         return await deleteUser(id, repository);
-    }
-
-    async get(id){
-        return await getUser(id, repository);
     }
 
     async getByEmail(email){

@@ -18,10 +18,6 @@ class ProductRepository {
     getList(params = {}) {
         throw new Error('METHOD_NOT_IMPLEMENTED');
     }
-
-    getByName(name){
-        throw new Error('METHOD_NOT_IMPLEMENTED');
-    }
 }
 
 module.exports = {ProductRepository: ProductRepository}
