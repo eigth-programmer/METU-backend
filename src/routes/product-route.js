@@ -9,24 +9,42 @@ const controller = new ProductController();
 
 const storage = multer.diskStorage({
     destination: function (req, file, callback){
-        callback(null, '../assets/product-pics');
+        callback(null, './assets/product-pics');
     },
     filename: function (req, file, callback){
-        callback(null, new Date().toISOString() + file.originalname);
+        callback(null, file.originalname);
     }
 });
-const upload = multer({storage: storage});
+
+const fileFilter = (req, file, cb) => {
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg'){
+        cb(null, true)
+    } else {
+        cb(new Error('File extension not supported'), false)
+    }
+}
+
+const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter,
+});
 
 router.post("/",
-    upload.single('image'),
+    upload.array('images', 5),
     (req, res) => {
+
+    let fileList = [];
+
+    req.files.forEach(file => {
+       fileList.push({path: file.path});
+    });
 
     controller.create({
         name: req.body.name,
         price: req.body.price,
         brand: req.body.brand,
         description: req.body.description,
-        images: [],
+        images: fileList,
         categories: req.body.categories,
         taxes: req.body.taxes,
         features: req.body.features,
@@ -40,8 +58,14 @@ router.post("/",
 });
 
 router.put("/:id",
-    upload.single('image'),
+    upload.array('images', 5),
     (req, res)=> {
+
+    let fileList = [];
+
+    req.files.forEach(file => {
+        fileList.push(file.path);
+    });
 
     controller.update({
         id: req.params.id,
@@ -49,7 +73,7 @@ router.put("/:id",
         price: req.body.price,
         brand: req.body.brand,
         description: req.body.description,
-        images: [],
+        images: fileList,
         categories: req.body.categories,
         taxes: req.body.taxes,
         features: req.body.features,

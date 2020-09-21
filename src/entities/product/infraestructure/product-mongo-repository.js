@@ -4,6 +4,7 @@ const {ProductRepository} = require('../domain/product-repository')
 
 class ProductMongoRepository extends ProductRepository{
     async create(product) {
+        console.log(product);
         const newProduct = new MongoProduct(product);
         const {id,
             name,
