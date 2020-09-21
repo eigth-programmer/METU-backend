@@ -5,8 +5,8 @@ const {TaxRepository} = require('../domain/tax-repository');
 class TaxMongoRepository extends TaxRepository {
     async create(tax) {
         const newTax = new MongoTax(tax);
-        await newTax.save();
-        return new Tax();
+        const {id, name, amount} = await newTax.save();
+        return new Tax(id, name, amount);
     }
 
     async delete(id) {
@@ -15,9 +15,12 @@ class TaxMongoRepository extends TaxRepository {
 
     async getList(params = {}) {
         const taxes = await MongoTax.find(params);
-        return taxes.map(tax => {
-            new Tax();
-        })
+        let list = [];
+        taxes.forEach(tax => {
+            const {id, name, amount} = tax;
+            list.push(new Tax(id, name, amount));
+        });
+        return list;
     }
 }
 

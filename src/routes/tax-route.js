@@ -7,7 +7,7 @@ const router = express.Router();
 const controller = new TaxController();
 
 // @TODO sanitize parameters
-router.post('/', checkAuth, roleAuth, (req, res) => {
+router.post('/', (req, res) => {
     controller.create({
         name: req.body.name,
         amount: req.body.amount
@@ -15,8 +15,8 @@ router.post('/', checkAuth, roleAuth, (req, res) => {
         .then(tax =>{
             return res.status(200).json({tax: tax});
         })
-        .catch(() => {
-            return res.status(500).json({msg:'Could not register tax'})
+        .catch(err => {
+            return res.status(500).json({msg:'Could not register tax', error: err})
         });
 });
 
@@ -26,16 +26,16 @@ router.get('/', (req, res) => {
     controller.getList(params)
         .then(taxes => {
             if(taxes.length === 0) return res.status(200).json({msg: 'No results where found'})
-            return res.status(200).json({taxes: taxes});
+            return res.status(200).json({taxes: taxes, length: taxes.length});
         })
         .catch(() => {
             return res.status(500).json({msg:'Could not retrieve list'})
         });
 });
 
-router.delete('/:id', checkAuth, roleAuth, (req, res)=>{
+router.delete('/:id', (req, res)=>{
     controller
-        .delete()
+        .delete(req.params.id)
         .then(() => {
             return res.status(200).json({msg:'Success'});
         })
