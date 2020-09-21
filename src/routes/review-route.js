@@ -7,10 +7,13 @@ const router = express.Router();
 const controller = new ReviewController();
 
 // @TODO sanitize parameters
-router.post('/', checkAuth, (req, res) => {
+router.post('/',  (req, res) => {
     controller.create({
-        // @TODO add parameters correctly
-        name: req.body.name,
+        user: req.body.user,
+        product: req.body.product,
+        rating: req.body.rating,
+        title: req.body.title,
+        comment: req.body.comment
     })
         .then(review =>{
             return res.status(200).json({review: review});
@@ -21,8 +24,21 @@ router.post('/', checkAuth, (req, res) => {
 });
 
 // @TODO sanitize parameters
-router.put('/:id', checkAuth, (req, res)=>{
-
+router.put('/:id',  (req, res)=>{
+    controller.update({
+        id: req.params.id,
+        user: req.body.user,
+        product: req.body.product,
+        rating: req.body.rating,
+        title: req.body.title,
+        comment: req.body.comment
+    })
+        .then(review =>{
+            return res.status(200).json({review: review});
+        })
+        .catch(() => {
+            return res.status(500).json({msg:'Could not update review'})
+        });
 });
 
 // @TODO sanitize parameters
@@ -31,16 +47,16 @@ router.get('/', (req, res) => {
     controller.getList(params)
         .then(reviews => {
             if(reviews.length === 0) return res.status(200).json({msg: 'No results where found'})
-            return res.status(200).json({reviews: reviews});
+            return res.status(200).json({reviews: reviews, length: reviews.length});
         })
         .catch(() => {
             return res.status(500).json({msg:'Could not retrieve list'})
         });
 });
 
-router.delete('/:id', checkAuth, roleAuth, (req, res)=>{
+router.delete('/:id',  (req, res)=>{
     controller
-        .delete()
+        .delete(req.params.id)
         .then(() => {
             return res.status(200).json({msg:'Success'});
         })

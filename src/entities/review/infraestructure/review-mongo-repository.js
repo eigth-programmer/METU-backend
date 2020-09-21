@@ -5,13 +5,29 @@ const {ReviewRepository} = require('../domain/review-repository')
 class ReviewMongoRepository extends ReviewRepository{
     async create(review) {
         const newReview = new MongoReview(review);
-        await newReview.save();
-        return new Review(newReview);
+        const {id,
+            user,
+            product,
+            created,
+            rating,
+            title,
+            comment} = await newReview.save();
+        return new Review(id, user, product, created, rating, title, comment);
     }
 
     async update(review) {
-        const updateReview = new MongoReview(review);
-        await updateReview.findByIdAndUpdate(review.id, review);
+        const {id,
+            user,
+            product,
+            created,
+            rating,
+            title,
+            comment} = await MongoReview.findByIdAndUpdate(review.id, {
+            product: review.product,
+            rating: review.rating,
+            title: review.title,
+            comment: review.comment});
+        return new Review(id, user, product, created, rating, title, comment);
     }
 
     async delete(id) {
@@ -20,9 +36,25 @@ class ReviewMongoRepository extends ReviewRepository{
 
     async getList(params = {}) {
         const reviews = await MongoReview.find(params);
-        return reviews.map( review => {
-            new Review(review);
-        });
+        let list = [];
+        reviews.forEach(review =>{
+            const {id,
+                user,
+                product,
+                created,
+                rating,
+                title,
+                comment} = review;
+
+            list.push(new Review(id,
+                user,
+                product,
+                created,
+                rating,
+                title,
+                comment));
+        })
+        return list;
     }
 }
 
