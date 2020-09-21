@@ -7,8 +7,8 @@
  
     - Doesn't include authentication, authorization nor security related mesures to protect routes 
     - Returns all information from the Database not using DTOs
-    - Doens't guarantee FK restrictions
-    - Doesn't return complete informatio
+    - Doens't guarantee database integrity restrictions
+    - Doesn't return complete information
     - Doens't remove files once entities are deleted
     - Only includes basic use cases for entities
 
