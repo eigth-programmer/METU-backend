@@ -20,7 +20,12 @@ const orderSchema = new Schema({
         amount: Number,
         unit: {type: Schema.ObjectId, ref: 'Unit', required: true},
         product: {type: Schema.ObjectId, ref: 'Product', required: true}
-    }]
+    }],
+    rating: {
+        amount: {type: Number, required: true},
+        comment: {type: String},
+        required: false
+    }
 });
 
 module.exports = mongoose.model('Order', orderSchema);
