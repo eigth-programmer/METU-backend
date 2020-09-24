@@ -11,8 +11,7 @@ const userSchema = new Schema({
     },
     password: {type: String, required: true},
     created: {type: Date, default: Date.now()},
-    role: {type: Schema.ObjectId, ref: 'Role'},
-    discounts: [{type: Schema.ObjectId, ref: 'Discount'}]
+    role: {type: Schema.ObjectId, ref: 'Role'}
 });
 
 module.exports = mongoose.model('User', userSchema);

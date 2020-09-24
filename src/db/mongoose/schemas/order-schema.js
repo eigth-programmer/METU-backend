@@ -10,7 +10,16 @@ const orderSchema = new Schema({
     discounts:[{type: Schema.ObjectId, ref: 'Discount'}],
     lines: [{
         amount: Number,
+        unit: {type: Schema.ObjectId, ref: 'Unit', required: true},
         product: {type: Schema.ObjectId, ref: 'Product', required: true}
+    }],
+    basePrice: {type: Number, required: true},
+    taxesPrice: {type: Number, required: true},
+    totalPrice: {type: Number, required: true},
+    gifts: [{
+        amount: Number,
+        unit: {type: Schema.ObjectId, ref: 'Unit', required: true},
+        product: {type: Schema.ObjectId, ref: 'Product'}
     }]
 });
 
