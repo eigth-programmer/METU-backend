@@ -11,10 +11,10 @@
     - Doesn't return complete information
     - Doens't remove files once entities are deleted
     - Only includes basic use cases for entities
+    - Has login and register broken
 
 :book: Functionalities included but not used or finished:
     
     - Role authorization
     - JWT authetication
     - Stripe payments 
-    
