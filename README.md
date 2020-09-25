@@ -1,7 +1,7 @@
 # METU-backend
 ## E-commerce/store management software back-end API
 
-* Version: 1.0.0.0 - Plain API
+* Version: 1.0.0.1 - Plain API
  
 :warning: This version:
  
