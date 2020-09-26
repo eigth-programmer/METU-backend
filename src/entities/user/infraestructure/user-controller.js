@@ -5,7 +5,7 @@ const getUserByEmail = require('../application/get-user-by-email');
 const {UserMongoRepository} = require("./user-mongo-repository");
 const repository = new UserMongoRepository();
 
-const existsUser = async (mail) => {
+const existsUser = async(mail) => {
     try {
         return await getUserByEmail(mail, repository);
     } catch (err) {
@@ -23,7 +23,7 @@ const create = async(user) => {
 
 const update = async(req, res) => {
     const {id} = req.params.id;
-    const {username, email, password, role} = req.body;
+    const {username, email, password} = req.body;
     try {
         const user = await updateUser({id: id, username: username, email:email, password: password}, repository);
         return res.status(200).json({user: user});

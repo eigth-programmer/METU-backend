@@ -1,11 +1,14 @@
 const getRole = require('../application/get-role');
+const getRoleByName = require('../application/get-role-by-name');
 const {RoleMongoRepository} = require("./role-mongo-repository");
 const repository = new RoleMongoRepository();
 
-class RoleController {
-    async get(id){
-        return await getRole(id, repository);
-    }
+const get = async(id) => {
+    return await getRole(id, repository);
 }
 
-module.exports = {RoleController: RoleController}
+const getByName = async(name) => {
+    return await getRoleByName(name, repository);
+}
+
+module.exports = {get: get, getByName: getByName}

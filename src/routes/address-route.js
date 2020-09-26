@@ -1,12 +1,12 @@
 const express = require('express');
-const checkAuth = require('../middelware/security/auth');
+const auth = require('../middelware/security/auth');
 const { AddressController } = require('../entities/address/infraestructure/address-controller');
 
 const router = express.Router();
 const controller = new AddressController();
 
 // @TODO sanitize parameters
-router.post('/', (req, res) => {
+router.post('/', auth.isLogged, auth.isAdmin,(req, res) => {
     controller.create({
         street: req.body.street,
         portal: req.body.portal,
