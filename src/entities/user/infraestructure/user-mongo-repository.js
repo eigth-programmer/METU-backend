@@ -26,10 +26,12 @@ class UserMongoRepository extends UserRepository{
     async getByEmail(email) {
         let retUser = null;
         const user = await MongoUser.find({ email: email });
-        if(user) retUser = new User(user.email,
-            user.password,
-            user.role,
-            user.created);
+        if(user.length > 0) retUser = new User(
+            user[0].id,
+            user[0].email,
+            user[0].password,
+            user[0].role,
+            user[0].created);
         return retUser;
     }
 }

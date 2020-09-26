@@ -1,6 +1,6 @@
 const express = require('express');
-const checkAuth = require('../helpers/security/check-auth');
-const roleAuth = require('../helpers/security/role-auth');
+const checkAuth = require('../middelware/security/check-auth');
+const roleAuth = require('../middelware/security/role-auth');
 const { OrderController } = require('../entities/order/infraestructure/order-controller');
 
 const router = express.Router();
