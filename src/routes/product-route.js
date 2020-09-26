@@ -1,6 +1,5 @@
 const express = require('express');
-const checkAuth = require('../middelware/security/check-auth');
-const roleAuth = require('../middelware/security/role-auth');
+const checkAuth = require('../middelware/security/auth');
 const multer = require('multer');
 const {ProductController} = require('../entities/product/infraestructure/product-controller');
 

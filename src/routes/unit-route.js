@@ -1,6 +1,5 @@
 const express = require('express');
-const checkAuth = require('../middelware/security/check-auth');
-const roleAuth = require('../middelware/security/role-auth');
+const checkAuth = require('../middelware/security/auth');
 const { UnitController } = require('../entities/unit/infraestructure/unit-controller');
 
 const router = express.Router();
