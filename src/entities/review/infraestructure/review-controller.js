@@ -6,36 +6,61 @@ const {ReviewMongoRepository} = require('./review-mongo-repository');
 const repository = new ReviewMongoRepository();
 
 const create = async(req, res) => {
+    const {user, product, rating, title, comment} = req.body;
 
+    try {
+        const review = await createReview({
+            user: user,
+            product: product,
+            rating: rating,
+            title: title,
+            comment: comment
+        }, repository)
+        return res.status(200).json({review: review});
+    } catch (err) {
+        return res.status(500).json({msg:'Could not update review'});
+    }
 }
 
 const update = async(req, res) => {
+    const {id} = req.params;
+    const {user, product, rating, title, comment} = req.body;
 
+    try {
+        const review = await updateReview({
+            id: id,
+            user: user,
+            product: product,
+            rating: rating,
+            title: title,
+            comment: comment
+        }, repository)
+        return res.status(200).json({review: review});
+    } catch (err) {
+        return res.status(500).json({msg:'Could not update review'});
+    }
 }
 
 const getList = async(req, res) => {
+    const params = {};
 
+    try {
+        const reviews = await listReviews(params, repository);
+        if(reviews.length === 0) return res.status(200).json({msg: 'No results where found'})
+        return res.status(200).json({reviews: reviews, length: reviews.length});
+    } catch (err) {
+        return res.status(500).json({msg:'Could not retrieve list', error: err});
+    }
 }
 
 const remove = async(req, res) => {
+    const {id} = req.params;
 
-}
-
-class ReviewController {
-    async create(review){
-        return await createReview(review, repository);
-    }
-
-    async update(review){
-        return await updateReview(review, repository);
-    }
-
-    async delete(id) {
-        return await deleteReview(id, repository);
-    }
-
-    async getList(params){
-        return await listReviews(params, repository);
+    try {
+        await deleteReview(id, repository);
+        return res.status(200).json({msg:'Success'});
+    } catch (err) {
+        return res.status(500).json({msg:'Could not delete review', error: err});
     }
 }
 

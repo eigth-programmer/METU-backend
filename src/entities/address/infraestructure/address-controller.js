@@ -9,8 +9,16 @@ const create = async(req, res) => {
     const {street, portal, floor, door, city, postCode, country, client, type} = req.body;
 
     try{
-        const address = await createAddress({street: street, portal: portal, floor: floor, door: door,
-            city: city, postCode: postCode, country: country, client: client, type: type},
+        const address = await createAddress({
+                street: street,
+                portal: portal,
+                floor: floor,
+                door: door,
+                city: city,
+                postCode: postCode,
+                country: country,
+                client: client,
+                type: type},
             repository);
         return res.status(200).json({address: address});
     } catch (err) {
@@ -23,8 +31,17 @@ const update = async(req, res) => {
     const {street, portal, floor, door, city, postCode, country, client, type} = req.body;
 
     try {
-        const address = await updateAddress({id: id, street: street, portal: portal, floor: floor, door: door,
-                city: city, postCode: postCode, country: country, client: client, type: type},
+        const address = await updateAddress({
+                id: id,
+                street: street,
+                portal: portal,
+                floor: floor,
+                door: door,
+                city: city,
+                postCode: postCode,
+                country: country,
+                client: client,
+                type: type},
             repository);
         return res.status(200).json({address: address});
     } catch (err) {
