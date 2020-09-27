@@ -6,6 +6,26 @@ const listOrders = require('../application/list-order');
 const {OrderMongoRepository} = require('./order-mongo-repository');
 const repository = new OrderMongoRepository();
 
+const create = async(req, res) => {
+
+}
+
+const update = async(req, res) => {
+
+}
+
+const get = async(req, res) => {
+
+}
+
+const getList = async(req, res) => {
+
+}
+
+const remove = async(req, res) => {
+
+}
+
 class OrderController {
     async create(order){
         return await createOrder(order, repository);
@@ -28,4 +48,4 @@ class OrderController {
     }
 }
 
-module.exports = { OrderController: OrderController}
+module.exports = {create: create, update: update, remove: remove, getList: getList, get: get}

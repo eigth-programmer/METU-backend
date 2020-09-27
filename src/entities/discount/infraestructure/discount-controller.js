@@ -5,22 +5,49 @@ const listDiscount = require('../application/list-discount');
 const {DiscountMongoRepository} = require('./discount-mongo-repository');
 const repository = new DiscountMongoRepository();
 
-class DiscountController {
-    async create(discount){
-        return await createDiscount(discount, repository);
-    }
+const create = async(req, res) => {
+    const {name, amount, description, validity} = req.body;
 
-    async update(discount){
-        return await updateDiscount(discount, repository);
-    }
-
-    async delete(id) {
-        return await deleteDiscount(id, repository);
-    }
-
-    async getList(params){
-        return await listDiscount(params, repository);
+    try {
+        const discount = await createDiscount({name: name, amount: amount, description: description, validity: validity}, repository);
+        return res.status(200).json({discount: discount});
+    } catch (err) {
+        return res.status(500).json({msg:'Could not register discount'})
     }
 }
 
-module.exports = { DiscountController: DiscountController}
+const update = async(req, res) => {
+    const {id} = req.params;
+    const {name, amount, description, validity} = req.body;
+    try {
+        const discount = await updateDiscount({id: id, name: name, amount: amount, description: description, validity: validity}, repository)
+        return res.status(200).json({discount: discount});
+    } catch (err) {
+        return res.status(500).json({msg:'Could not update discount', error: err});
+    }
+}
+
+const getList = async(req, res) => {
+    const params = {};
+
+    try {
+        const discounts = await listDiscount(params, repository);
+        if(discounts.length === 0) return res.status(200).json({msg: 'No results where found'});
+        return res.status(200).json({discounts: discounts, length: discounts.length});
+    } catch (err) {
+        return res.status(500).json({msg:'Could not retrieve list', error: err});
+    }
+}
+
+const remove = async(req, res) => {
+    const {id} = req.params;
+
+    try {
+        await deleteDiscount(id, repository);
+        return res.status(200).json({msg:'Success'});
+    } catch (err) {
+        return res.status(500).json({msg:'Could not delete discount', error: err});
+    }
+}
+
+module.exports = {create: create, update: update, remove: remove, getList: getList}

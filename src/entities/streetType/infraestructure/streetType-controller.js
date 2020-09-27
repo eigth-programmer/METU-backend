@@ -4,6 +4,18 @@ const listStreetType = require('../application/list-streetType');
 const {StreetTypeMongoRepository} = require('./streetType-mongo-repository');
 const repository = new StreetTypeMongoRepository();
 
+const create = async(req, res) => {
+
+}
+
+const getList = async(req, res) => {
+
+}
+
+const remove = async(req, res) => {
+
+}
+
 class StreetTypeController {
     async create(streetType){
         return await createStreetType(streetType, repository);
@@ -18,4 +30,4 @@ class StreetTypeController {
     }
 }
 
-module.exports = { StreetTypeController: StreetTypeController}
+module.exports = {create: create, remove: remove, getList: getList}

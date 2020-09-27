@@ -2,6 +2,10 @@ const listOrderStates = require('../application/list-orderState');
 const {OrderStateMongoRepository} = require('./orderState-mongo-repository');
 const repository = new OrderStateMongoRepository();
 
+const getList = async(req, res) => {
+
+}
+
 class OrderStateController {
     async getList(params){
         return await listOrderStates(params, repository);

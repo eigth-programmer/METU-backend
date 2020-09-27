@@ -4,6 +4,18 @@ const listTax = require('../application/list-tax');
 const {TaxMongoRepository} = require('./tax-mongo-repository');
 const repository = new TaxMongoRepository();
 
+const create = async(req, res) => {
+
+}
+
+const getList = async(req, res) => {
+
+}
+
+const remove = async(req, res) => {
+
+}
+
 class TaxController {
     async create(tax){
         return await createTax(tax, repository);
@@ -18,4 +30,4 @@ class TaxController {
     }
 }
 
-module.exports = { TaxController: TaxController}
+module.exports = {create: create, remove: remove, getList: getList}

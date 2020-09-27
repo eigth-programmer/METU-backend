@@ -6,6 +6,22 @@ const listProducts = require('../application/list-product');
 const {ProductMongoRepository} = require('./product-mongo-repository');
 const repository = new ProductMongoRepository();
 
+const create = async(req, res) => {
+
+}
+
+const update = async(req, res) => {
+
+}
+
+const getList = async(req, res) => {
+
+}
+
+const remove = async(req, res) => {
+
+}
+
 class ProductController {
     async create(product){
         return await createProduct(product, repository);
@@ -28,4 +44,4 @@ class ProductController {
     }
 }
 
-module.exports = { ProductController: ProductController}
+module.exports = {create: create, update: update, remove: remove, getList: getList}

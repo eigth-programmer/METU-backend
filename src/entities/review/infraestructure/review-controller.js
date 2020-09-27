@@ -5,6 +5,22 @@ const listReviews = require('../application/list-review');
 const {ReviewMongoRepository} = require('./review-mongo-repository');
 const repository = new ReviewMongoRepository();
 
+const create = async(req, res) => {
+
+}
+
+const update = async(req, res) => {
+
+}
+
+const getList = async(req, res) => {
+
+}
+
+const remove = async(req, res) => {
+
+}
+
 class ReviewController {
     async create(review){
         return await createReview(review, repository);
@@ -23,4 +39,4 @@ class ReviewController {
     }
 }
 
-module.exports = { ReviewController: ReviewController}
+module.exports = {create: create, update: update, remove: remove, getList: getList}

@@ -4,6 +4,18 @@ const listFeatures = require('../application/list-features');
 const {FeatureMongoRepository} = require('./feature-mongo-repository');
 const repository = new FeatureMongoRepository();
 
+const create = async(req, res) => {
+
+}
+
+const getList = async(req, res) => {
+
+}
+
+const remove = async(req, res) => {
+
+}
+
 class FeatureController {
     async create(feature){
         return await createFeature(feature, repository);
@@ -18,4 +30,4 @@ class FeatureController {
     }
 }
 
-module.exports = { FeatureController: FeatureController}
+module.exports = {create: create, remove: remove, getList: getList}
