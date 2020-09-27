@@ -1,9 +1,4 @@
-const express = require('express');
-const auth = require('../middelware/security/auth');
 const multer = require('multer');
-const ProductController= require('../entities/product/infraestructure/product-controller');
-
-const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, callback){
@@ -27,11 +22,8 @@ const upload = multer({
     fileFilter: fileFilter,
 });
 
-router.post("/", upload.array('images', 5), ProductController.create);
-router.put("/:id", upload.array('images', 5), ProductController.update);
-router.get("/:id", ProductController.get);
-router.get("/", ProductController.getList);
-router.delete("/:id", ProductController.remove);
+const saveFile = async (req, res, next) => {
+    upload.array('images', 5);
+}
 
-
-module.exports = router;
+module.exports = {saveFile: saveFile};
