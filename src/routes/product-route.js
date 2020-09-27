@@ -1,13 +1,14 @@
 const express = require('express');
 const auth = require('../middelware/security/auth');
-const multer = require('multer');
 const ProductController= require('../entities/product/infraestructure/product-controller');
 
 const router = express.Router();
 
+const multer = require('multer');
+
 const storage = multer.diskStorage({
     destination: function (req, file, callback){
-        callback(null, './assets/product-pics');
+        callback(null, './pictures/product-pics');
     },
     filename: function (req, file, callback){
         callback(null, file.originalname);
@@ -32,6 +33,5 @@ router.put("/:id", upload.array('images', 5), ProductController.update);
 router.get("/:id", ProductController.get);
 router.get("/", ProductController.getList);
 router.delete("/:id", ProductController.remove);
-
 
 module.exports = router;

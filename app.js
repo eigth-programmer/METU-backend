@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const morgan = require('morgan');
 const connectDB = require('./src/db/mongoose/moongose-connection');
 
 //Load Config
@@ -11,9 +12,11 @@ const PORT = process.env.PORT || 8181;
 const app = express();
 
 //middleware
+app.disable('etag');
 app.use(bodyParser.json());
 app.use(cors());
-app.use('product-pics', express.static('./assets/product-pics'));
+app.use(morgan("dev", {}));
+app.use('product-pics', express.static('./pictures/product-pics'));
 
 //DB connection
 connectDB();
