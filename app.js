@@ -36,6 +36,7 @@ app.use('/addresses',require('./src/routes/address-route'));
 app.use('/orders',require('./src/routes/order-route'));
 app.use('/discounts', require('./src/routes/discount-route'));
 app.use('/order-states', require('./src/routes/order-state-route'));
+app.use('/brands', require('./src/routes/brand-route'));
 
 app.listen(PORT, () => {
     console.log(`Metu app listening at http://localhost:${PORT}`)

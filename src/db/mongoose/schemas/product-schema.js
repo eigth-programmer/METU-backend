@@ -5,7 +5,7 @@ const productSchema = new Schema({
     _id: {type: Schema.ObjectId, auto: true},
     name: {type: String, required: true},
     price: {type: Number, required: true},
-    brand: {type: String},
+    brand: [{type: Schema.ObjectId, ref: 'Brand'}],
     description: {type: String},
     images: [{path: String}],
     categories: [{type: Schema.ObjectId, ref: 'Category'}],
