@@ -25,7 +25,8 @@ const orderSchema = new Schema({
         amount: {type: Number, required: true},
         comment: {type: String},
         required: false
-    }
+    },
+    address: {type: Schema.ObjectId, ref: 'Address', required: true}
 });
 
 module.exports = mongoose.model('Order', orderSchema);
