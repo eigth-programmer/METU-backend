@@ -5,9 +5,9 @@ const AddressController = require('../entities/address/infraestructure/address-c
 const router = express.Router();
 
 // @TODO sanitize parameters
-router.post('/', auth.isLogged, auth.isAdmin, AddressController.create);
-router.put('/:id', AddressController.update);
-router.get('/', AddressController.getList);
-router.delete('/:id', AddressController.remove);
+router.post('/', auth.isLogged, AddressController.create);
+router.put('/:id', auth.isLogged, auth.isAdmin, AddressController.update);
+router.get('/', auth.isLogged, auth.isAdmin, AddressController.getList);
+router.delete('/:id', auth.isLogged, auth.isAdmin, AddressController.remove);
 
 module.exports = router;

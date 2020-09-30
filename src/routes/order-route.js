@@ -5,10 +5,10 @@ const OrderController = require('../entities/order/infraestructure/order-control
 const router = express.Router();
 
 // @TODO sanitize parameters
-router.post('/', OrderController.create);
-router.put('/:id', OrderController.update);
-router.get('/:id', OrderController.get);
-router.get('/', OrderController.getList);
-router.delete('/:id', OrderController.remove);
+router.post('/', auth.isLogged, OrderController.create);
+router.put('/:id', auth.isLogged, auth.isAdmin, OrderController.update);
+router.get('/:id', auth.isLogged, auth.isAdmin, OrderController.get);
+router.get('/', auth.isLogged, auth.isAdmin, OrderController.getList);
+router.delete('/:id', auth.isLogged, auth.isAdmin, auth.isAdmin, auth.isAdmin, OrderController.remove);
 
 module.exports = router;

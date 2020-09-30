@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post('/login', auth.login);
 router.post('/register', auth.register);
-router.put('/:id', UserController.update);
-router.delete('/:id',  UserController.remove);
-router.get('/email', UserController.getByMail);
+router.put('/:id', auth.isLogged, auth.isAdmin, UserController.update);
+router.delete('/:id', auth.isLogged, auth.isAdmin, UserController.remove);
+router.get('/email', auth.isLogged, auth.isAdmin, UserController.getByMail);
 
 module.exports = router;

@@ -5,8 +5,8 @@ const CategoryController = require('../entities/category/infraestructure/categor
 const router = express.Router();
 
 // @TODO sanitize parameters
-router.post('/', CategoryController.create);
+router.post('/', auth.isLogged, auth.isAdmin, CategoryController.create);
 router.get('/', CategoryController.getList);
-router.delete('/:id', CategoryController.remove);
+router.delete('/:id', auth.isLogged, auth.isAdmin, CategoryController.remove);
 
 module.exports = router;

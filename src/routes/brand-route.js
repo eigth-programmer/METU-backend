@@ -5,8 +5,8 @@ const BrandController = require('../entities/brand/infrastructure/brand-controll
 const router = express.Router();
 
 // @TODO sanitize parameters
-router.post('/', BrandController.create);
+router.post('/', auth.isLogged, auth.isAdmin, BrandController.create);
 router.get('/', BrandController.getList);
-router.delete('/:id', BrandController.remove);
+router.delete('/:id', auth.isLogged, auth.isAdmin, BrandController.remove);
 
 module.exports = router;

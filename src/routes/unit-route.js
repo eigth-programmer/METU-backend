@@ -5,8 +5,8 @@ const UnitController = require('../entities/unit/infraestructure/unit-controller
 const router = express.Router();
 
 // @TODO sanitize parameters
-router.post('/', UnitController.create);
+router.post('/', auth.isLogged, auth.isAdmin, UnitController.create);
 router.get('/', UnitController.getList);
-router.delete('/:id', UnitController.remove);
+router.delete('/:id', auth.isLogged, auth.isAdmin, UnitController.remove);
 
 module.exports = router;

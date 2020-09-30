@@ -5,8 +5,8 @@ const TaxController = require('../entities/tax/infraestructure/tax-controller');
 const router = express.Router();
 
 // @TODO sanitize parameters
-router.post('/', TaxController.create);
-router.get('/', TaxController.getList);
-router.delete('/:id', TaxController.remove);
+router.post('/', auth.isLogged, auth.isAdmin, TaxController.create);
+router.get('/', auth.isLogged, auth.isAdmin, TaxController.getList);
+router.delete('/:id', auth.isLogged, auth.isAdmin, TaxController.remove);
 
 module.exports = router;

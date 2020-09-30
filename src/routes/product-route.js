@@ -28,10 +28,10 @@ const upload = multer({
     fileFilter: fileFilter,
 });
 
-router.post("/", upload.array('images', 5), ProductController.create);
-router.put("/:id", upload.array('images', 5), ProductController.update);
+router.post("/", auth.isLogged, auth.isAdmin, upload.array('images', 5), ProductController.create);
+router.put("/:id", auth.isLogged, auth.isAdmin, upload.array('images', 5), ProductController.update);
 router.get("/:id", ProductController.get);
 router.get("/", ProductController.getList);
-router.delete("/:id", ProductController.remove);
+router.delete("/:id", auth.isLogged, auth.isAdmin, ProductController.remove);
 
 module.exports = router;

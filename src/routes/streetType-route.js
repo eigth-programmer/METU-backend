@@ -5,8 +5,8 @@ const StreetTypeController = require('../entities/streetType/infraestructure/str
 const router = express.Router();
 
 // @TODO sanitize parameters
-router.post('/', StreetTypeController.create);
+router.post('/', auth.isLogged, auth.isAdmin, StreetTypeController.create);
 router.get('/', StreetTypeController.getList);
-router.delete('/:id',  StreetTypeController.remove);
+router.delete('/:id', auth.isLogged, auth.isAdmin, StreetTypeController.remove);
 
 module.exports = router;

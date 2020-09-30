@@ -5,9 +5,9 @@ const ReviewController = require('../entities/review/infraestructure/review-cont
 const router = express.Router();
 
 // @TODO sanitize parameters
-router.post('/', ReviewController.create);
-router.put('/:id', ReviewController.update);
+router.post('/', auth.isLogged, ReviewController.create);
+router.put('/:id', auth.isLogged, auth.isAdmin, ReviewController.update);
 router.get('/', ReviewController.getList);
-router.delete('/:id', ReviewController.remove);
+router.delete('/:id', auth.isLogged, auth.isAdmin, ReviewController.remove);
 
 module.exports = router;
