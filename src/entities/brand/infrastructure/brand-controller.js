@@ -19,7 +19,7 @@ const getList = async(req, res) => {
     const params = {}
 
     try {
-        const brands = listBrands(params, repository);
+        const brands = await listBrands(params, repository);
         if(brands.length === 0) return res.status(200).json({msg: 'No results where found'})
         return res.status(200).json({brands: brands, length: brands.length});
     } catch (err) {
