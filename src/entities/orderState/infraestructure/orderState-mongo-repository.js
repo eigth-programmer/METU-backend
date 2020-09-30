@@ -1,16 +1,11 @@
 const MongoOrderState = require('../../../db/mongoose/schemas/order-state-schema');
-const {OrderState} = require('../domain/orderState');
-const {OrderStateRepository} = require('../domain/orderState-repository');
+const {OrderStateRepository} = require('./orderState-repository');
+const {mapTo} = require('./orderState-mapper');
 
 class OrderStateMongoRepository extends OrderStateRepository {
     async getList(params = {}) {
         const states = await MongoOrderState.find(params);
-        let list = [];
-        states.forEach(state => {
-            const {id, name} = state;
-            list.push(new OrderState(id, name));
-        });
-        return list;
+        return states.map(state => mapTo(state));
     }
 }
 

@@ -1,12 +1,11 @@
 const MongoFeature = require('../../../db/mongoose/schemas/feature-schema');
-const {Feature} = require('../domain/feature');
-const {FeatureRepository} = require('../domain/feature-repository');
+const {FeatureRepository} = require('./feature-repository');
+const {mapTo} = require('./feature-mapper');
 
 class FeatureMongoRepository extends FeatureRepository {
     async create(feature) {
         const newFeature = new MongoFeature(feature);
-        const {id, name, unit} = await newFeature.save();
-        return new Feature(id, name, unit);
+        return mapTo(await newFeature.save());
     }
 
     async delete(id) {
@@ -15,11 +14,7 @@ class FeatureMongoRepository extends FeatureRepository {
 
     async getList(params = {}) {
         const features = await MongoFeature.find(params);
-        let list = [];
-        features.forEach(feature=> {
-            const {id, name, unit} = feature;
-            list.push(new Feature(id, name, unit))});
-        return list;
+        return features.map(feature => mapTo(feature));
     }
 }
 

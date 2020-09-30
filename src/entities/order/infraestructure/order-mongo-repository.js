@@ -1,6 +1,6 @@
 const MongoOrder = require('../../../db/mongoose/schemas/order-schema');
 const {Order} = require('../domain/order');
-const {OrderRepository} = require('../domain/order-repository')
+const {OrderRepository} = require('./order-repository')
 
 class OrderMongoRepository extends OrderRepository{
     async create(order) {

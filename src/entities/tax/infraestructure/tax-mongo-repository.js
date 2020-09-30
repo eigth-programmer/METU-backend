@@ -1,12 +1,12 @@
 const MongoTax = require('../../../db/mongoose/schemas/tax-schema');
-const {Tax} = require('../domain/tax');
-const {TaxRepository} = require('../domain/tax-repository');
+const {TaxRepository} = require('./tax-repository');
+const {mapTo} = require('./tax-mapper');
 
 class TaxMongoRepository extends TaxRepository {
     async create(tax) {
         const newTax = new MongoTax(tax);
-        const {id, name, amount} = await newTax.save();
-        return new Tax(id, name, amount);
+
+        return mapTo(await newTax.save());
     }
 
     async delete(id) {
@@ -15,12 +15,8 @@ class TaxMongoRepository extends TaxRepository {
 
     async getList(params = {}) {
         const taxes = await MongoTax.find(params);
-        let list = [];
-        taxes.forEach(tax => {
-            const {id, name, amount} = tax;
-            list.push(new Tax(id, name, amount));
-        });
-        return list;
+
+        return taxes.map(tax => mapTo(tax));
     }
 }
 

@@ -1,12 +1,12 @@
 const MongoUnit = require('../../../db/mongoose/schemas/unit-schema');
-const {Unit} = require('../domain/unit');
-const {UnitRepository} = require('../domain/unit-repository');
+const {UnitRepository} = require('./unit-repository');
+const {mapTo} = require('./unit-mapper')
 
 class UnitMongoRepository extends UnitRepository {
     async create(unit) {
         const newUnit = new MongoUnit(unit);
-        const {id, name, symbol} = await newUnit.save();
-        return new Unit(id, name, symbol);
+
+        return mapTo(await newUnit.save());
     }
 
     async delete(id) {
@@ -15,12 +15,8 @@ class UnitMongoRepository extends UnitRepository {
 
     async getList(params = {}) {
         const units = await MongoUnit.find(params);
-        let list = [];
-        units.forEach(unit => {
-            const {id, name, symbol} = unit;
-            list.push(new Unit(id, name, symbol));
-        });
-        return list;
+
+        return units.map(unit => mapTo(unit));
     }
 }
 

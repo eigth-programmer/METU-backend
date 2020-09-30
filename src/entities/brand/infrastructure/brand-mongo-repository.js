@@ -1,12 +1,11 @@
 const MongoBrand = require('../../../db/mongoose/schemas/brand-schema');
-const {Brand} = require('../domain/brand');
-const {BrandRepository} = require('../domain/brand-repository');
+const {BrandRepository} = require('./brand-repository');
+const {mapTo} = require('./brand-mapper');
 
 class BrandMongoRepository extends BrandRepository {
     async create(brand) {
         const newBrand = new MongoBrand(brand);
-        const {id, name} = await newBrand.save();
-        return new Brand(id, name);
+        return mapTo(await newBrand.save());
     }
 
     async delete(id) {
@@ -15,12 +14,7 @@ class BrandMongoRepository extends BrandRepository {
 
     async getList(params = {}) {
         const brands = await MongoBrand.find(params);
-        let list = [];
-        brands.forEach(unit => {
-            const {id, name} = unit;
-            list.push(new Brand(id, name));
-        });
-        return list;
+        return brands.map(brand => mapTo(brand));
     }
 }
 

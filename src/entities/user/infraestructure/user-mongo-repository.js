@@ -1,22 +1,22 @@
 const MongoUser = require('../../../db/mongoose/schemas/user-schema');
-const {User} = require("../domain/user");
-const {UserRepository} = require("../domain/user-repository");
+const {UserRepository} = require("./user-repository");
+const {mapTo} = require('./user-mapper');
 
 class UserMongoRepository extends UserRepository{
     async create(user) {
         const newUser = new MongoUser(user);
-        const {id, email, password, role, created} = await newUser.save();
-        return new User(id, email, password, role, created);
+
+        return mapTo(await newUser.save());
     }
 
     async update(user) {
-        const {id, email, password, role, created} = await MongoUser.findByIdAndUpdate(user.id, {
+        const update = {
             email: user.email,
             password: user.password,
             role: user.role
-        });
+        }
 
-        return new User(id, email, password, role, created);
+        return mapTo(await MongoUser.findByIdAndUpdate(user.id, update, {new: true}));
     }
 
     async delete(id) {
@@ -26,12 +26,7 @@ class UserMongoRepository extends UserRepository{
     async getByEmail(email) {
         let retUser = null;
         const user = await MongoUser.find({ email: email });
-        if(user.length > 0) retUser = new User(
-            user[0].id,
-            user[0].email,
-            user[0].password,
-            user[0].role,
-            user[0].created);
+        if(user.length > 0) retUser = mapTo(user[0]);
         return retUser;
     }
 }

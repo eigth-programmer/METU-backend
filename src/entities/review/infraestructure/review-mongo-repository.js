@@ -1,33 +1,23 @@
 const MongoReview = require('../../../db/mongoose/schemas/review-schema');
-const {Review} = require('../domain/review');
-const {ReviewRepository} = require('../domain/review-repository')
+const {ReviewRepository} = require('./review-repository');
+const {mapTo} = require('./review-mapper');
 
 class ReviewMongoRepository extends ReviewRepository{
     async create(review) {
         const newReview = new MongoReview(review);
-        const {id,
-            user,
-            product,
-            created,
-            rating,
-            title,
-            comment} = await newReview.save();
-        return new Review(id, user, product, created, rating, title, comment);
+
+        return mapTo(await newReview.save());
     }
 
     async update(review) {
-        const {id,
-            user,
-            product,
-            created,
-            rating,
-            title,
-            comment} = await MongoReview.findByIdAndUpdate(review.id, {
+        const update = {
             product: review.product,
             rating: review.rating,
             title: review.title,
-            comment: review.comment});
-        return new Review(id, user, product, created, rating, title, comment);
+            comment: review.comment
+        }
+
+        return mapTo(await MongoReview.findByIdAndUpdate(review.id, update, {new: true}));
     }
 
     async delete(id) {
@@ -36,25 +26,8 @@ class ReviewMongoRepository extends ReviewRepository{
 
     async getList(params = {}) {
         const reviews = await MongoReview.find(params);
-        let list = [];
-        reviews.forEach(review =>{
-            const {id,
-                user,
-                product,
-                created,
-                rating,
-                title,
-                comment} = review;
 
-            list.push(new Review(id,
-                user,
-                product,
-                created,
-                rating,
-                title,
-                comment));
-        })
-        return list;
+        return reviews.map(review => mapTo(review));
     }
 }
 

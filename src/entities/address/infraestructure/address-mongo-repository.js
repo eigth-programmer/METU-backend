@@ -1,45 +1,17 @@
 const MongoAddress = require('../../../db/mongoose/schemas/address-schema');
 const {Address} = require('../domain/address');
-const {AddressRepository} = require('../domain/address-repository')
+const {AddressRepository} = require('./address-repository');
+const {mapTo} = require('./address-mapper');
 
 class AddressMongoRepository extends AddressRepository{
     async create(address) {
         const newAddress = new MongoAddress(address);
-        const {id,
-            street,
-            portal,
-            floor,
-            door,
-            city,
-            postCode,
-            country,
-            client,
-            type} = await newAddress.save();
-
-        return new Address(id,
-            street,
-            portal,
-            floor,
-            door,
-            city,
-            postCode,
-            country,
-            client,
-            type);
+        return mapTo(await newAddress.save())
     }
 
     async update(address) {
-
-        const {id,
-            street,
-            portal,
-            floor,
-            door,
-            city,
-            postCode,
-            country,
-            client,
-            type} = await MongoAddress.findByIdAndUpdate(address.id, {street: address.street,
+        const update = {
+            street: address.street,
             portal: address.portal,
             floor: address.floor,
             door: address.door,
@@ -47,18 +19,9 @@ class AddressMongoRepository extends AddressRepository{
             postCode: address.postCode,
             country: address.country,
             client: address.client,
-            type: address.type});
+            type: address.type};
 
-        return new Address(id,
-            street,
-            portal,
-            floor,
-            door,
-            city,
-            postCode,
-            country,
-            client,
-            type);
+        return mapTo(await MongoAddress.findByIdAndUpdate(address.id, update, {new: true}));
     }
 
     async delete(id) {
@@ -67,32 +30,7 @@ class AddressMongoRepository extends AddressRepository{
 
     async getList(params = {}) {
         const addresses = await MongoAddress.find();
-        let list = [];
-        addresses.forEach(address => {
-            const {id,
-                street,
-                portal,
-                floor,
-                door,
-                city,
-                postCode,
-                country,
-                client,
-                type} = address;
-
-            list.push(new Address(id,
-                street,
-                portal,
-                floor,
-                door,
-                city,
-                postCode,
-                country,
-                client,
-                type));
-        });
-
-        return list;
+        return addresses.map(address => mapTo(address));
     }
 }
 
