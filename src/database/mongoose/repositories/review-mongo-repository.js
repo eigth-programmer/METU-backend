@@ -1,6 +1,6 @@
-const MongoReview = require('../../../db/mongoose/schemas/review-schema');
-const {ReviewRepository} = require('./review-repository');
-const {mapTo} = require('./review-mapper');
+const MongoReview = require('../schemas/review-schema');
+const {ReviewRepository} = require('../../../entities/review/infraestructure/review-repository');
+const {mapTo} = require('../../../entities/review/infraestructure/review-mapper');
 
 class ReviewMongoRepository extends ReviewRepository{
     async create(review) {

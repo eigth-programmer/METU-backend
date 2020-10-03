@@ -2,7 +2,7 @@ const createAddress = require('../application/create-address');
 const updateAddress = require('../application/update-address');
 const deleteAddress = require('../application/delete-address');
 const listAddresses = require('../application/list-address');
-const {AddressMongoRepository} = require('./address-mongo-repository');
+const {AddressMongoRepository} = require('../../../database/mongoose/repositories/address-mongo-repository');
 const repository = new AddressMongoRepository();
 
 const create = async(req, res) => {

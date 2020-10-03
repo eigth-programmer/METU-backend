@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const morgan = require('morgan');
-const connectDB = require('./src/db/mongoose/moongose-connection');
+const {connectDB} = require('./src/database/mongoose/moongose-connection');
 
 //Load Config
 dotenv.config({path: './src/config/.env'});
@@ -15,7 +15,7 @@ const app = express();
 app.disable('etag');
 app.use(bodyParser.json());
 app.use(cors());
-app.use(morgan("dev", {}));
+app.use(morgan("dev"));
 app.use('product-pics', express.static('./pictures/product-pics'));
 
 //DB connection

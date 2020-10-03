@@ -1,6 +1,6 @@
-const MongoStreetType = require('../../../db/mongoose/schemas/street-type-schema');
-const {StreetTypeRepository} = require('./streetType-repository');
-const {mapTo} = require('./streetType-mapper');
+const MongoStreetType = require('../schemas/street-type-schema');
+const {StreetTypeRepository} = require('../../../entities/streetType/infraestructure/streetType-repository');
+const {mapTo} = require('../../../entities/streetType/infraestructure/streetType-mapper');
 
 class StreetTypeMongoRepository extends StreetTypeRepository {
     async create(streetType) {

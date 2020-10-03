@@ -1,7 +1,7 @@
 const createTax = require('../application/create-tax');
 const deleteTax = require('../application/delete-tax');
 const listTax = require('../application/list-tax');
-const {TaxMongoRepository} = require('./tax-mongo-repository');
+const {TaxMongoRepository} = require('../../../database/mongoose/repositories/tax-mongo-repository');
 const repository = new TaxMongoRepository();
 
 const create = async(req, res) => {

@@ -2,7 +2,7 @@ const createReview = require('../application/create-review');
 const updateReview = require('../application/update-review');
 const deleteReview = require('../application/delete-review');
 const listReviews = require('../application/list-review');
-const {ReviewMongoRepository} = require('./review-mongo-repository');
+const {ReviewMongoRepository} = require('../../../database/mongoose/repositories/review-mongo-repository');
 const repository = new ReviewMongoRepository();
 
 const create = async(req, res) => {

@@ -1,6 +1,6 @@
-const MongoProduct = require('../../../db/mongoose/schemas/product-schema');
-const {ProductRepository} = require('./product-repository');
-const {mapTo} = require('./product-mapper');
+const MongoProduct = require('../schemas/product-schema');
+const {ProductRepository} = require('../../../entities/product/infraestructure/product-repository');
+const {mapTo} = require('../../../entities/product/infraestructure/product-mapper');
 
 class ProductMongoRepository extends ProductRepository{
     async create(product) {

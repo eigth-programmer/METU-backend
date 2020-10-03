@@ -1,6 +1,6 @@
-const MongoDiscount = require('../../../db/mongoose/schemas/discount-schema');
-const {DiscountRepository} = require('./discount-repository');
-const {mapTo} = require('./discount-mapper');
+const MongoDiscount = require('../schemas/discount-schema');
+const {DiscountRepository} = require('../../../entities/discount/infraestructure/discount-repository');
+const {mapTo} = require('../../../entities/discount/infraestructure/discount-mapper');
 
 class DiscountMongoRepository extends DiscountRepository{
     async create(discount) {

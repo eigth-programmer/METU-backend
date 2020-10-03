@@ -3,7 +3,7 @@ const updateOrder = require('../application/update-order');
 const deleteOrder = require('../application/delete-order');
 const getOrder = require('../application/get-order');
 const listOrders = require('../application/list-order');
-const {OrderMongoRepository} = require('./order-mongo-repository');
+const {OrderMongoRepository} = require('../../../database/mongoose/repositories/order-mongo-repository');
 const repository = new OrderMongoRepository();
 
 const create = async(req, res) => {

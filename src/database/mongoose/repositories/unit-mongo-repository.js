@@ -1,6 +1,6 @@
-const MongoUnit = require('../../../db/mongoose/schemas/unit-schema');
-const {UnitRepository} = require('./unit-repository');
-const {mapTo} = require('./unit-mapper')
+const MongoUnit = require('../schemas/unit-schema');
+const {UnitRepository} = require('../../../entities/unit/infraestructure/unit-repository');
+const {mapTo} = require('../../../entities/unit/infraestructure/unit-mapper')
 
 class UnitMongoRepository extends UnitRepository {
     async create(unit) {

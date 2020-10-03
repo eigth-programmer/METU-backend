@@ -1,7 +1,7 @@
 const createCategory = require('../application/create-category');
 const deleteCategory = require('../application/delete-category');
 const listCategories = require('../application/list-category');
-const {CategoryMongoRepository} = require('./category-mongo-repository');
+const {CategoryMongoRepository} = require('../../../database/mongoose/repositories/category-mongo-repository');
 const repository = new CategoryMongoRepository();
 
 const create = async(req, res) => {

@@ -1,6 +1,6 @@
-const MongoBrand = require('../../../db/mongoose/schemas/brand-schema');
-const {BrandRepository} = require('./brand-repository');
-const {mapTo} = require('./brand-mapper');
+const MongoBrand = require('../schemas/brand-schema');
+const {BrandRepository} = require('../../../entities/brand/infrastructure/brand-repository');
+const {mapTo} = require('../../../entities/brand/infrastructure/brand-mapper');
 
 class BrandMongoRepository extends BrandRepository {
     async create(brand) {

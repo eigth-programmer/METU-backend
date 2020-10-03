@@ -1,6 +1,6 @@
 const getRole = require('../application/get-role');
 const getRoleByName = require('../application/get-role-by-name');
-const {RoleMongoRepository} = require("./role-mongo-repository");
+const {RoleMongoRepository} = require("../../../database/mongoose/repositories/role-mongo-repository");
 const repository = new RoleMongoRepository();
 
 const get = async(id) => {

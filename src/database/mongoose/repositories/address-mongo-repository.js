@@ -1,7 +1,7 @@
-const MongoAddress = require('../../../db/mongoose/schemas/address-schema');
-const {Address} = require('../domain/address');
-const {AddressRepository} = require('./address-repository');
-const {mapTo} = require('./address-mapper');
+const MongoAddress = require('../schemas/address-schema');
+const {Address} = require('../../../entities/address/domain/address');
+const {AddressRepository} = require('../../../entities/address/infraestructure/address-repository');
+const {mapTo} = require('../../../entities/address/infraestructure/address-mapper');
 
 class AddressMongoRepository extends AddressRepository{
     async create(address) {

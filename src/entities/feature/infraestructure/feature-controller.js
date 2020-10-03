@@ -1,7 +1,7 @@
 const createFeature = require('../application/create-feature');
 const deleteFeature = require('../application/delete-feature');
 const listFeatures = require('../application/list-features');
-const {FeatureMongoRepository} = require('./feature-mongo-repository');
+const {FeatureMongoRepository} = require('../../../database/mongoose/repositories/feature-mongo-repository');
 const repository = new FeatureMongoRepository();
 
 const create = async(req, res) => {

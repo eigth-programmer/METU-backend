@@ -1,6 +1,6 @@
-const MongoTax = require('../../../db/mongoose/schemas/tax-schema');
-const {TaxRepository} = require('./tax-repository');
-const {mapTo} = require('./tax-mapper');
+const MongoTax = require('../schemas/tax-schema');
+const {TaxRepository} = require('../../../entities/tax/infraestructure/tax-repository');
+const {mapTo} = require('../../../entities/tax/infraestructure/tax-mapper');
 
 class TaxMongoRepository extends TaxRepository {
     async create(tax) {

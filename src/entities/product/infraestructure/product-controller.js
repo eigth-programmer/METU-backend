@@ -3,7 +3,7 @@ const updateProduct = require('../application/update-product');
 const deleteProduct = require('../application/delete-product');
 const getProduct = require('../application/get-product');
 const listProducts = require('../application/list-product');
-const {ProductMongoRepository} = require('./product-mongo-repository');
+const {ProductMongoRepository} = require('../../../database/mongoose/repositories/product-mongo-repository');
 const repository = new ProductMongoRepository();
 
 const create = async(req, res) => {

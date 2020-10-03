@@ -2,7 +2,7 @@ const createDiscount = require('../application/create-discount');
 const updateDiscount = require('../application/update-discount');
 const deleteDiscount = require('../application/delete-discount');
 const listDiscount = require('../application/list-discount');
-const {DiscountMongoRepository} = require('./discount-mongo-repository');
+const {DiscountMongoRepository} = require('../../../database/mongoose/repositories/discount-mongo-repository');
 const repository = new DiscountMongoRepository();
 
 const create = async(req, res) => {

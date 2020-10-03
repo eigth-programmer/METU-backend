@@ -1,6 +1,6 @@
-const MongoUser = require('../../../db/mongoose/schemas/user-schema');
-const {UserRepository} = require("./user-repository");
-const {mapTo} = require('./user-mapper');
+const MongoUser = require('../schemas/user-schema');
+const {UserRepository} = require("../../../entities/user/infraestructure/user-repository");
+const {mapTo} = require('../../../entities/user/infraestructure/user-mapper');
 
 class UserMongoRepository extends UserRepository{
     async create(user) {

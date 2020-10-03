@@ -1,5 +1,5 @@
-const MongoRole = require('../../../db/mongoose/schemas/role-schema');
-const {mapTo} = require('./role-mapper');
+const MongoRole = require('../schemas/role-schema');
+const {mapTo} = require('../../../entities/role/infraestructure/role-mapper');
 
 class RoleMongoRepository {
     async get(id) {

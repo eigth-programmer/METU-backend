@@ -1,5 +1,5 @@
 const listOrderStates = require('../application/list-orderState');
-const {OrderStateMongoRepository} = require('./orderState-mongo-repository');
+const {OrderStateMongoRepository} = require('../../../database/mongoose/repositories/orderState-mongo-repository');
 const repository = new OrderStateMongoRepository();
 
 const getList = async(req, res) => {

@@ -1,6 +1,6 @@
-const MongoFeature = require('../../../db/mongoose/schemas/feature-schema');
-const {FeatureRepository} = require('./feature-repository');
-const {mapTo} = require('./feature-mapper');
+const MongoFeature = require('../schemas/feature-schema');
+const {FeatureRepository} = require('../../../entities/feature/infraestructure/feature-repository');
+const {mapTo} = require('../../../entities/feature/infraestructure/feature-mapper');
 
 class FeatureMongoRepository extends FeatureRepository {
     async create(feature) {

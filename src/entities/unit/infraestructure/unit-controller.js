@@ -1,7 +1,7 @@
 const createUnit = require('../application/create-unit');
 const deleteUnit = require('../application/delete-unit');
 const listUnits = require('../application/list-unit');
-const {UnitMongoRepository} = require('./unit-mongo-repository');
+const {UnitMongoRepository} = require('../../../database/mongoose/repositories/unit-mongo-repository');
 const repository = new UnitMongoRepository();
 
 const create = async(req, res) => {

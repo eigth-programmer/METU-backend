@@ -2,7 +2,7 @@ const createUser = require('../application/create-user');
 const updateUser = require('../application/update-user');
 const deleteUser = require('../application/delete-user');
 const getUserByEmail = require('../application/get-user-by-email');
-const {UserMongoRepository} = require("./user-mongo-repository");
+const {UserMongoRepository} = require("../../../database/mongoose/repositories/user-mongo-repository");
 const repository = new UserMongoRepository();
 
 const existsUser = async(mail) => {

@@ -1,6 +1,6 @@
-const MongoOrder = require('../../../db/mongoose/schemas/order-schema');
-const {OrderRepository} = require('./order-repository');
-const {mapTo} = require('./order-mapper');
+const MongoOrder = require('../schemas/order-schema');
+const {OrderRepository} = require('../../../entities/order/infraestructure/order-repository');
+const {mapTo} = require('../../../entities/order/infraestructure/order-mapper');
 
 class OrderMongoRepository extends OrderRepository{
     async create(order) {

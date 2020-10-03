@@ -1,6 +1,6 @@
-const MongoCategory = require('../../../db/mongoose/schemas/category-schema');
-const {CategoryRepository} = require('./category-repository');
-const {mapTo} = require('./category-mapper');
+const MongoCategory = require('../schemas/category-schema');
+const {CategoryRepository} = require('../../../entities/category/infraestructure/category-repository');
+const {mapTo} = require('../../../entities/category/infraestructure/category-mapper');
 
 class CategoryMongoRepository extends CategoryRepository {
     async create(category) {

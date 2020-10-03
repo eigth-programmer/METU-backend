@@ -1,7 +1,7 @@
 const createBrand = require('../application/create-brand');
 const deleteBrand = require('../application/delete-brand');
 const listBrands = require('../application/list-brand');
-const {BrandMongoRepository} = require('../infrastructure/brand-mongo-repository');
+const {BrandMongoRepository} = require('../../../database/mongoose/repositories/brand-mongo-repository');
 const repository = new BrandMongoRepository();
 
 const create = async(req, res) => {
