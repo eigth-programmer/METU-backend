@@ -20,6 +20,7 @@ const create = async(req, res) => {
                 client: client,
                 type: type},
             repository);
+
         return res.status(200).json({address: address});
     } catch (err) {
         return res.status(500).json({msg:'Could not create address', error: err});

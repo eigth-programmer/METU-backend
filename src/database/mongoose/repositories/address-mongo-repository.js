@@ -6,6 +6,7 @@ const {mapTo} = require('../../../entities/address/infraestructure/address-mappe
 class AddressMongoRepository extends AddressRepository{
     async create(address) {
         const newAddress = new MongoAddress(address);
+
         return mapTo(await newAddress.save())
     }
 
